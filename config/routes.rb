@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'homes#index'
+  root 'static_pages#index'
   devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   namespace :api do
@@ -7,11 +7,9 @@ Rails.application.routes.draw do
 
       resources :users, only: [:index, :show] do
         resources :prompts, only: [:index, :create]
-        resources :submissions, only: [:index, :show, :create]
       end
 
       resources :prompts, only: [:show]  do
-        resources :submissions, only: [:index, :show, :create]
       end
     end
   end
