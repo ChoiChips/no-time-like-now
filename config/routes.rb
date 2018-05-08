@@ -9,7 +9,7 @@ Rails.application.routes.draw do
         resources :prompts, only: [:index, :create]
       end
 
-      resources :prompts, only: [:show]  do
+      resources :prompts, only: [:index, :show]  do
       end
     end
   end
