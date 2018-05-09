@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PromptsTile from '../components/PromptsTile'
+import PromptsShowContainer from './PromptsShowContainer'
 
 class PromptsIndexContainer extends Component {
   constructor(props){
@@ -11,20 +12,20 @@ class PromptsIndexContainer extends Component {
 
   componentDidMount(){
     fetch('/api/v1/prompts.json')
-      .then(response => {
-        if (response.ok) {;
-          return response;
-        } else {
-          let errorMessage = `${response.status} (${response.statusText})`,
-              error = new Error(errorMessage);
-          throw(error);
-        }
-      })
-      .then(response => response.json())
-      .then(body => {
-        this.setState({ prompts: body });
-      })
-      .catch(error => console.error(`Error in fetch: ${error.message}`));
+    .then(response => {
+      if (response.ok) {;
+        return response;
+      } else {
+        let errorMessage = `${response.status} (${response.statusText})`,
+            error = new Error(errorMessage);
+        throw(error);
+      }
+    })
+    .then(response => response.json())
+    .then(body => {
+      this.setState({ prompts: body });
+    })
+    .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
 
 
