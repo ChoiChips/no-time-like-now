@@ -7,4 +7,7 @@ FactoryBot.define do
     password_confirmation 'password'
   end
 
+  factory :prompt do
+    sequence(:description) {|n| "This is test prompt #{n}, written by user_1, to be answered with a test response" }
+  end
 end
