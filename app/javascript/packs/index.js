@@ -7,10 +7,10 @@ import PromptsShowContainer from '../react/containers/PromptsShowContainer'
 const Index = props => {
   return (
     <Router history={browserHistory}>
-      <Route path='/' component={PromptsIndexContainer} />
+      <Route path='prompts' component={PromptsIndexContainer} />
       <Route path='prompts/:id' component={PromptsShowContainer} />
 
-      <Route path=':handle' component={PromptsShowContainer} />
+      <Route path='users/:handle' component={PromptsShowContainer} />
     </Router>
   );
 }

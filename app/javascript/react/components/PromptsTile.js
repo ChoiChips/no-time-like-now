@@ -13,7 +13,7 @@ const PromptsTile = (props) => {
         </div>
       </Link>
       <div>---------</div>
-        <Link className="name" to={`/${props.handle}`}>-{props.handle}</Link>
+        <Link className="name" to={`/users/${props.handle}`}>-{props.handle}</Link>
     </div>
   )
 }
