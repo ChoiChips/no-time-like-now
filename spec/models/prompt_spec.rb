@@ -1,12 +1,10 @@
 require 'rails_helper'
-require 'pry'
 
 describe Prompt do
-  test_user = User.create!(email: "test@gmail.com", password: "password", password_confirmation: "password")
+  test_user = User.create!(email: "prompt_model@gmail.com", password: "password", password_confirmation: "password")
   test_prompt = Prompt.new(description: "This is test prompt 1, written by user_1, to be answered with a test response.", user: test_user)
 
   it "is valid with valid attributes" do
-    binding.pry
     expect(test_prompt).to be_valid
   end
 
