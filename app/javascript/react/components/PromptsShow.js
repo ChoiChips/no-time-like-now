@@ -12,7 +12,7 @@ const PromptsShow = (props) => {
       </div>
       <div>---------</div>
       <div>
-        <Link className="name" to={`/users/${props.handle}`}>-{props.handle}</Link>
+        <Link className="name" to={`/users/${props.id}`}>{props.handle}</Link>, {props.date_made}
       </div>
     </div>
   )

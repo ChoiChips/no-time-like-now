@@ -36,6 +36,7 @@ class PromptsIndexContainer extends Component {
           id={prompt.id}
           description={prompt.description}
           handle={prompt.handle}
+          date_made={prompt.date_made}
         />
       )
     })

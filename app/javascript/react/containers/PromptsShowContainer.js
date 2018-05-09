@@ -42,6 +42,7 @@ class PromptsShowContainer extends Component {
             id={this.state.prompt.id}
             handle={this.state.prompt.handle}
             description={this.state.prompt.description}
+            date_made={this.state.prompt.date_made}
           />
         </div>
       </div>
