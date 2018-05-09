@@ -9,6 +9,8 @@ const Index = props => {
     <Router history={browserHistory}>
       <Route path='/' component={PromptsIndexContainer} />
       <Route path='prompts/:id' component={PromptsShowContainer} />
+
+      <Route path=':handle' component={PromptsShowContainer} />
     </Router>
   );
 }

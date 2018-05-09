@@ -10,9 +10,10 @@ const PromptsTile = (props) => {
           <h3 className="description">
             {props.description}
           </h3>
-          <h6 className="name">User ID: {props.author}</h6>
         </div>
       </Link>
+      <div>---------</div>
+        <Link className="name" to={`/${props.handle}`}>-{props.handle}</Link>
     </div>
   )
 }

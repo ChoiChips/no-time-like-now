@@ -23,11 +23,10 @@ class PromptsIndexContainer extends Component {
     })
     .then(response => response.json())
     .then(body => {
-      this.setState({ prompts: body });
+      this.setState({ prompts: body.prompts });
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
-
 
   render() {
     let displayedPrompts = this.state.prompts.map( (prompt) =>{
@@ -36,7 +35,7 @@ class PromptsIndexContainer extends Component {
           key={prompt.id}
           id={prompt.id}
           description={prompt.description}
-          author={prompt.user_id}
+          handle={prompt.handle}
         />
       )
     })
