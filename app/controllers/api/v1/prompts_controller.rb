@@ -1,12 +1,12 @@
 class Api::V1::PromptsController < ApiController
-  before_action :authenticate_user!
+  # before_action :authenticate_user!
 
   def index
     render json: Prompt.all
   end
 
   def show
-    render json: Prompt.find(params[:id])
+    render json: Prompt.find(params[:id]), serializer: PromptShowSerializer
   end
 
   def create
