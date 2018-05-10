@@ -10,9 +10,9 @@ User.destroy_all
 Prompt.destroy_all
 
 # Test users
-user_1 = User.create!(:email => 'nick@gmail.com', :password => 'topsecret', :password_confirmation => 'topsecret')
-user_2 = User.create!(:email => 'brianna@gmail.com', :password => 'topsecret', :password_confirmation => 'topsecret')
-user_3 = User.create!(:email => 'amylynn@gmail.com', :password => 'topsecret', :password_confirmation => 'topsecret')
+user_1 = User.create!(:handle => 'Nick', :email => 'nick@gmail.com', :password => 'topsecret', :password_confirmation => 'topsecret')
+user_2 = User.create!(:handle => 'Bri', :email => 'brianna@gmail.com', :password => 'topsecret', :password_confirmation => 'topsecret')
+user_3 = User.create!(:handle => 'Amy', :email => 'amylynn@gmail.com', :password => 'topsecret', :password_confirmation => 'topsecret')
 
 # Test prompts
 prompt_1 = Prompt.create!(description: "This is test prompt 1, written by user_1, to be answered with a test response.", user: user_1)

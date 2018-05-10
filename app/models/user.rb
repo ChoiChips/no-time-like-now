@@ -4,7 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  def username
 
-  end
+  validates :handle, presence: true
+  validates :email, presence: true
+  validates :password, presence: true
+  has_many :prompts
 end

@@ -27,22 +27,22 @@ class PromptsShowContainer extends Component {
     .then(response => response.json())
     .then(prompt => {
       this.setState ({
-        prompt: prompt
+        prompt: prompt.prompt
       })
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`))
   }
 
   render() {
-
     return(
       <div className="row">
         <div className="columns medium-11 medium-centered">
           <PromptsShow
             key={this.state.prompt.id}
             id={this.state.prompt.id}
-            userId={this.state.prompt.user_id}
+            handle={this.state.prompt.handle}
             description={this.state.prompt.description}
+            date_made={this.state.prompt.date_made}
           />
         </div>
       </div>

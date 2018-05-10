@@ -10,9 +10,11 @@ const PromptsTile = (props) => {
           <h3 className="description">
             {props.description}
           </h3>
-          <h6 className="name">User ID: {props.author}</h6>
         </div>
       </Link>
+      <div className="user-sig">
+        <Link className="name" to={`/users/${props.id}`}>{props.handle}</Link> on {props.date_made}
+      </div>
     </div>
   )
 }

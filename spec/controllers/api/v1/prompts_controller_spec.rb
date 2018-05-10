@@ -15,10 +15,10 @@ RSpec.describe Api::V1::PromptsController, type: :controller do
       expect(response.status).to eq 200
       expect(response.content_type).to eq("application/json")
 
-      expect(returned_json.length).to eq 3
-      expect(returned_json[0]["description"]).to eq "This is test prompt 1, written by user_1, to be answered with a test response."
-      expect(returned_json[1]["description"]).to eq "This is test prompt 2, written by user_1, to be answered with a test response."
-      expect(returned_json[2]["description"]).to eq "This is test prompt 3, written by user_1, to be answered with a test response."
+      expect(returned_json["prompts"].length).to eq 3
+      expect(returned_json["prompts"][0]["description"]).to eq "This is test prompt 1, written by user_1, to be answered with a test response."
+      expect(returned_json["prompts"][1]["description"]).to eq "This is test prompt 2, written by user_1, to be answered with a test response."
+      expect(returned_json["prompts"][2]["description"]).to eq "This is test prompt 3, written by user_1, to be answered with a test response."
     end
   end
 end

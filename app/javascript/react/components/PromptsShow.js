@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 const PromptsShow = (props) => {
 
@@ -9,8 +10,8 @@ const PromptsShow = (props) => {
           {props.description}
         </h2>
       </div>
-      <div>
-        <h6 className="name">User ID: {props.author}</h6>
+      <div className="name-show">
+        <Link className="name" to={`/users/${props.id}`}>{props.handle}</Link> on {props.date_made}
       </div>
     </div>
   )

@@ -2,6 +2,15 @@
 
 .name {
   font-family: $font-primary;
-  text-align: center;
+  text-align: left;
   color: $color-tertiary;
+}
+
+.user-sig{
+  font-style: italic;
+}
+
+.name-show{
+  text-align: center;
+  font-style: italic;
 }
