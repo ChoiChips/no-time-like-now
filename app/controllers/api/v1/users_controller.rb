@@ -1,13 +1,19 @@
 class Api::V1::UsersController < ApiController
-  serialization_scope :current_user
+  # serialization_scope :current_user
+  before_action :authenticate_user!
 
   def index
-    render json: current_user
+    users = User.all
+    render json: users
   end
 
   def show
     user = User.find(params[:id])
     prompts = user.prompts
-    render json: prompts
+    answers = user.answers
+    render json: {
+      prompts: prompts,
+      answers: answers
+    }
   end
 end

@@ -5,12 +5,16 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
 
-      resources :users, only: [:index, :show] do
+      resources :users, only: [:show] do
         resources :prompts, only: [:index, :create]
+        resources :answers, only: [:index]
       end
 
       resources :prompts, only: [:index, :show]  do
+        resources :answers, only: [:index, :create]
       end
+
+      resources :answers, only: [:show]
     end
   end
 

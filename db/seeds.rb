@@ -8,13 +8,25 @@
 
 User.destroy_all
 Prompt.destroy_all
-
-# Test users
+Answer.destroy_all
+#
+# # Test users
 user_1 = User.create!(:handle => 'Nick', :email => 'nick@gmail.com', :password => 'topsecret', :password_confirmation => 'topsecret')
 user_2 = User.create!(:handle => 'Bri', :email => 'brianna@gmail.com', :password => 'topsecret', :password_confirmation => 'topsecret')
 user_3 = User.create!(:handle => 'Amy', :email => 'amylynn@gmail.com', :password => 'topsecret', :password_confirmation => 'topsecret')
 
 # Test prompts
-prompt_1 = Prompt.create!(description: "This is test prompt 1, written by user_1, to be answered with a test response.", user: user_1)
-prompt_2 = Prompt.create!(description: "This is test prompt 2, written by user_1, to be answered with a test response.", user: user_1)
-prompt_3 = Prompt.create!(description: "This is test prompt 3, written by user_2, to be answered with a test response.", user: user_2)
+prompt_1 = Prompt.create!(description: "This is test prompt 1, written by user_1, to be answered with a test answer.", user: user_1)
+prompt_2 = Prompt.create!(description: "This is test prompt 2, written by user_1, to be answered with a test answer.", user: user_1)
+prompt_3 = Prompt.create!(description: "This is test prompt 3, written by user_2, to be answered with a test answer.", user: user_2)
+
+# Test answers
+answer_1 = Answer.create!(answer: "This is test answer 1 for the test prompt 1. It must be a minimum of 50 characters long.", user: user_1, prompt: prompt_1)
+answer_2 = Answer.create!(answer: "This is test answer 2 for the test prompt 2. It must be a minimum of 50 characters long.", user: user_2, prompt: prompt_2)
+answer_3 = Answer.create!(answer: "This is test answer 3 for the test prompt 3. It must be a minimum of 50 characters long.", user: user_3, prompt: prompt_3)
+answer_4 = Answer.create!(answer: "This is test answer 4 for the test prompt 1. It must be a minimum of 50 characters long.", user: user_1, prompt: prompt_1)
+answer_5 = Answer.create!(answer: "This is test answer 5 for the test prompt 2. It must be a minimum of 50 characters long.", user: user_2, prompt: prompt_2)
+answer_6 = Answer.create!(answer: "This is test answer 6 for the test prompt 3. It must be a minimum of 50 characters long.", user: user_3, prompt: prompt_3)
+answer_7 = Answer.create!(answer: "This is test answer 7 for the test prompt 1. It must be a minimum of 50 characters long.", user: user_1, prompt: prompt_1)
+answer_8 = Answer.create!(answer: "This is test answer 8 for the test prompt 2. It must be a minimum of 50 characters long.", user: user_2, prompt: prompt_2)
+answer_9 = Answer.create!(answer: "This is test answer 9 for the test prompt 3. It must be a minimum of 50 characters long.", user: user_3, prompt: prompt_3)
