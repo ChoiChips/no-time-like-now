@@ -1,16 +1,18 @@
 class Api::V1::PromptsController < ApiController
+  # before_action :authenticate_user!
+
   def index
     render json: Prompt.all
   end
 
   def show
-    render json: Prompt.find(params[:id])
+    render json: Prompt.find(params[:id]), serializer: PromptShowSerializer
   end
 
   def create
     new_prompt = Prompt.new(prompt_params)
     new_prompt.user = current_user
-    
+
     if user_signed_in?
       if new_prompt.save
         render json: ["Successfully added"]
