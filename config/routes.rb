@@ -11,7 +11,7 @@ Rails.application.routes.draw do
       end
 
       resources :prompts, only: [:index, :show]  do
-        resources :answers, only: [:index, :create]
+        resources :answers, only: [:create]
       end
 
       resources :answers, only: [:show]

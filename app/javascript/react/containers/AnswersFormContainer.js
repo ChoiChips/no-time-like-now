@@ -6,12 +6,10 @@ class AnswersNewContainer extends Component {
     super(props)
     this.state = {
       prompt: '',
-      answer:  '',
-      errors: {}
+      answer:  ''
     }
   this.handleChange = this.handleChange.bind(this)
   this.handleSubmit = this.handleSubmit.bind(this)
-  this.validateAnswer = this.validateAnswer.bind(this)
   }
 
   componentDidMount() {
@@ -32,7 +30,7 @@ class AnswersNewContainer extends Component {
     .then(response => response.json())
     .then(prompt => {
       this.setState ({
-        prompt: prompt.prompt.description
+        prompt: prompt.prompt
       })
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`))
@@ -41,7 +39,6 @@ class AnswersNewContainer extends Component {
   handleChange(event) {
     let answerLength = this.state.answer.length
     let newAnswer = event.target.value
-    this.setState( {errors: {}} ) 
 
     if (newAnswer.substring(0, answerLength).includes(this.state.answer)) {
       this.setState({answer: event.target.value});
@@ -51,48 +48,68 @@ class AnswersNewContainer extends Component {
   handleSubmit(event) {
     event.preventDefault();
 
-    let answerValidation = this.validateAnswer(this.state.answer)
-
-    if (answerValidation) {
-      let formPayload = {answer: this.state.answer}
-      this.addNewAnswer(formPayload)
-      // Add fetch post call here
-    }
-  }
-
-  validateAnswer(answer) {
-    if (answer.trim().length < 50) {
-      let newError = { answerStatus: `Answer must be at least 50 characters long, currently ${answer.trim().length}/50 characters.` }
-      this.setState({ errors: Object.assign(this.state.errors, newError) })
-      return false
+    if ( confirm("Are you sure you wish to submit?") == false ) {
+      return false ;
     } else {
-      let errorState = this.state.errors
-      delete errorState.answerStatus
-      this.setState({ errors: errorState })
-      return true
+      let submission = {
+        answer: {
+          answer: this.state.answer,
+          prompt_id: this.state.prompt.id
+        }
+      }
+
+
+      fetch(`/api/v1/prompts/${this.state.prompt.id}/answers`, {
+        credentials: 'same-origin',
+        method: 'POST',
+        body: JSON.stringify(submission),
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
+      })
+      .then(response => {
+        if (response.ok) {
+          window.location.href = `http://localhost:3000/prompts/${this.state.prompt.id}`
+        } else {
+          let errorMessage = `${response.status} (${response.statusText})`,
+          error = new Error(errorMessage);
+          throw(error);
+        }
+      })
+      .catch(error => console.error(`Error in fetch (submitting new answer): ${error.message}`))
     }
   }
 
   render() {
-    let errorDiv;
-    let errorItems;
+    let characterCount = this.state.answer.trim().length
+    let message;
 
-    if (Object.keys(this.state.errors).length > 0) {
-      errorItems = Object.values(this.state.errors).map(error => {
-        return(<div key={error}>{error}</div>)
-      })
-      errorDiv = <div className="callout alert">{errorItems}</div>
+    if (characterCount < 100) {
+      message = `You need ${100 - characterCount} more characters to submit.`
+    } else if (characterCount >= 100 && characterCount < 500) {
+      message = `You have met expectations! Character count = ${characterCount}`
+    } else if (characterCount >= 500 && characterCount < 1000) {
+      message = `You have exceeded expectations! Character count = ${characterCount}`
+    } else if (characterCount >= 1000) {
+      message = `You're really going at it, arent you... Character count = ${characterCount}`
     }
+
+    let submitButton;
+
+    if (this.state.answer.trim().length >= 100) {
+      submitButton = <input type="submit" value="Submit" />
+    }
+
     return(
       <div className="row">
         <div className="columns medium-11 medium-centered">
           <form onSubmit={this.handleSubmit}>
             <label>
-              {this.state.prompt}
+              {this.state.prompt.description}
               <textarea value={this.state.answer} onChange={this.handleChange} />
             </label>
-            {errorDiv}
-            <input type="submit" value="Submit" />
+            <div>
+              {message}
+            </div>
+            {submitButton}
           </form>
         </div>
       </div>
