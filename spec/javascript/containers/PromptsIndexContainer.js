@@ -8,15 +8,13 @@ describe('PromptsIndexContainer', () => {
   let wrapper;
 
   beforeEach(() => {
-    let prompts = [
-      {description: "This is test prompt 1, written by user_1, to be answered with a test response.", user: 1},
-      {description: "This is test prompt 2, written by user_1, to be answered with a test response.", user: 1},
-      {description: "This is test prompt 3, written by user_1, to be answered with a test response.", user: 1}
-    ]
+    let fetchPrompts = {
+      prompts: [ {id: 1, description: "This is test prompt 1, written by user_1, to be answered with a test response.", handle: "Nick", date_made: "05/09/2018"} ]
+    }
 
     fetchMock.get('/api/v1/prompts.json', {
       status: 200,
-      body: prompts
+      body: fetchPrompts
     })
     wrapper = mount(
       <PromptsIndexContainer />
