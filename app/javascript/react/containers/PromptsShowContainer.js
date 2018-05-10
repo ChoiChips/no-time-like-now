@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PromptsShow from "../components/PromptsShow"
+import { Link } from 'react-router';
+
 
 class PromptsShowContainer extends Component {
   constructor(props){
@@ -44,6 +46,9 @@ class PromptsShowContainer extends Component {
             description={this.state.prompt.description}
             date_made={this.state.prompt.date_made}
           />
+        </div>
+        <div>
+          <Link className="" to={`/prompts/${this.props.params.id}/new`}>Create New Answer</Link>
         </div>
       </div>
     )
