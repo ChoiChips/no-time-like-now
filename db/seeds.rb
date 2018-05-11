@@ -19,6 +19,12 @@ user_3 = User.create!(:handle => 'Amy', :email => 'amylynn@gmail.com', :password
 prompt_1 = Prompt.create!(description: "This is test prompt 1, written by user_1, to be answered with a test answer.", user: user_1)
 prompt_2 = Prompt.create!(description: "This is test prompt 2, written by user_1, to be answered with a test answer.", user: user_1)
 prompt_3 = Prompt.create!(description: "This is test prompt 3, written by user_2, to be answered with a test answer.", user: user_2)
+prompt_4 = Prompt.create!(description: "This is test prompt 4, written by user_2, to be answered with a test answer.", user: user_2)
+prompt_5 = Prompt.create!(description: "This is test prompt 5, written by user_3, to be answered with a test answer.", user: user_3)
+prompt_6 = Prompt.create!(description: "This is test prompt 6, written by user_3, to be answered with a test answer.", user: user_3)
+prompt_7 = Prompt.create!(description: "This is test prompt 7, written by user_1, to be answered with a test answer.", user: user_1)
+prompt_8 = Prompt.create!(description: "This is test prompt 8, written by user_2, to be answered with a test answer.", user: user_2)
+prompt_9 = Prompt.create!(description: "This is test prompt 9, written by user_3, to be answered with a test answer.", user: user_3)
 
 # Test answers
 answer_1 = Answer.create!(answer: "This is test answer 1 for the test prompt 1. It must be a minimum of 50 characters long.", user: user_1, prompt: prompt_1)

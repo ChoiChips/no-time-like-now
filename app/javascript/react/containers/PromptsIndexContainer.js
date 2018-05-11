@@ -44,6 +44,7 @@ class PromptsIndexContainer extends Component {
     return (
       <div>
         <div className="row prompt-container">
+          <h1 className="name text-center">All Prompts</h1>
           {displayedPrompts}
         </div>
       </div>

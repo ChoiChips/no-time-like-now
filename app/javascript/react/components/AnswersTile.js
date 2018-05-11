@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 
-const PromptsTile = (props) => {
+const AnswersTile = (props) => {
 
   return (
     <div className="columns small-12 medium-6 large-4 end">
@@ -11,7 +11,7 @@ const PromptsTile = (props) => {
       <Link className="prompts-tile" to={`/prompts/${props.id}`}>
         <div className="content">
           <h3 className="description">
-            {props.description}
+            {props.answer}
           </h3>
         </div>
       </Link>
@@ -19,4 +19,4 @@ const PromptsTile = (props) => {
   )
 }
 
-export default PromptsTile;
+export default AnswersTile;

@@ -14,3 +14,30 @@
   text-align: center;
   font-style: italic;
 }
+
+.prompts-tile {
+  display: block;
+  margin: 0 auto 25px auto;
+  height: 200px;
+  max-width: 385px;
+  background: rgba($color-primary,.2);
+  font-family: helvetica, 'sans serif';
+  color: $black;
+  .name {
+    font-family: $font-primary;
+    text-align: center;
+    color: $color-tertiary;
+  }
+  .content {
+    padding: 15px;
+  }
+  // .photo {
+  //   height: 180px;
+  //   background-size: cover;
+  //   background-repeat: no-repeat;
+  //   box-shadow: 0 0 90px rgba(0,0,0,0.3) inset;
+  // }
+  &:hover {
+    background: rgba($color-primary,.5);
+  }
+}

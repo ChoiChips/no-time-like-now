@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import PromptsShow from "../components/PromptsShow"
 import { Link } from 'react-router';
 
+import AnswersTile from '../components/AnswersTile'
 
 class PromptsShowContainer extends Component {
   constructor(props){
     super(props)
     this.state = {
-      prompt:  {}
+      prompt:  {},
+      answers: []
     }
   }
 
@@ -29,13 +31,26 @@ class PromptsShowContainer extends Component {
     .then(response => response.json())
     .then(prompt => {
       this.setState ({
-        prompt: prompt.prompt
+        prompt: prompt.prompt,
+        answers: prompt.prompt.answers
       })
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`))
   }
 
   render() {
+    let displayedAnswers = this.state.answers.map( (answer) =>{
+      return (
+        <AnswersTile
+          key={answer.id}
+          id={answer.id}
+          answer={answer.answer}
+          handle={answer.handle}
+          date_made={answer.date_made}
+        />
+      )
+    })
+
     return(
       <div className="row">
         <div className="columns medium-11 medium-centered">
@@ -47,9 +62,11 @@ class PromptsShowContainer extends Component {
             date_made={this.state.prompt.date_made}
           />
         </div>
-        <div>
-          <Link className="" to={`/prompts/${this.props.params.id}/new`}>Create New Answer</Link>
+        <div className="text-center">
+          <h3><Link className="" to={`/prompts/${this.props.params.id}/new`}>Create New Answer</Link></h3>
         </div>
+
+        <div>{displayedAnswers}</div>
       </div>
     )
   }
