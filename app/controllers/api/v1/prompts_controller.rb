@@ -1,5 +1,6 @@
 class Api::V1::PromptsController < ApiController
-  # before_action :authenticate_user!
+  # skip_before_action :verify_authenticity_token
+  # before_action :recent_answer
 
   def index
     render json: Prompt.all

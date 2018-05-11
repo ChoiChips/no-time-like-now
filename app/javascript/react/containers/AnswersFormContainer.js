@@ -83,7 +83,7 @@ class AnswersNewContainer extends Component {
     let message;
 
     if (characterCount < 100) {
-      message = `You need ${100 - characterCount} more characters to submit.`
+      message = `You need ${100 - characterCount} more characters to submit. Remember, there is no backspace!`
     } else if (characterCount >= 100 && characterCount < 500) {
       message = `You have met expectations! Character count = ${characterCount}`
     } else if (characterCount >= 500 && characterCount < 1000) {
@@ -100,14 +100,14 @@ class AnswersNewContainer extends Component {
 
     return(
       <div className="row">
-        <div className="columns medium-11 medium-centered">
+        <div className="columns medium-12 large-12 medium-centered">
           <form onSubmit={this.handleSubmit}>
             <label>
               <h1>{this.state.prompt.description}</h1>
-              <textarea rows='50' cols='50' style={{border:"none"}} placeholder="Respond here. Remember, there is no backspace!" value={this.state.answer} onChange={this.handleChange} />
+              {message}
+              <textarea rows='25' cols='70' style={{border:"none"}} value={this.state.answer} onChange={this.handleChange} />
             </label>
             <div>
-              {message}
             </div>
             {submitButton}
           </form>
