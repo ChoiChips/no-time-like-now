@@ -10,10 +10,11 @@ class UserSerializer < ActiveModel::Serializer
   def recent_answer
     most_recent_answer = Answer.where(user: current_user).order('created_at DESC').last
 
-    if (most_recent_answer.created_at + 1.day) < Time.current
+    if most_recent_answer.nil?
+      return false
+    elsif (most_recent_answer.created_at + 1.day) < Time.current
       return false
     end
     return true
   end
-
 end
