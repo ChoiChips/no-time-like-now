@@ -25,6 +25,11 @@ class Api::V1::PromptsController < ApiController
     end
   end
 
+  def random
+    random_prompt = Prompt.all.sample.id
+    render json: random_prompt
+  end
+
   private
 
   def prompt_params

@@ -10,7 +10,8 @@ Rails.application.routes.draw do
         resources :answers, only: [:index]
       end
 
-      resources :prompts, only: [:index, :show]  do
+      resources :prompts, only: [:index, :show, :random]  do
+        get '/prompts/random', to: 'prompts#random'
         resources :answers, only: [:create]
       end
 

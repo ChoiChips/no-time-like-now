@@ -5,6 +5,8 @@ import PromptsIndexContainer from '../react/containers/PromptsIndexContainer'
 import PromptsShowContainer from '../react/containers/PromptsShowContainer'
 import UsersShowContainer from '../react/containers/UsersShowContainer'
 import AnswersFormContainer from '../react/containers/AnswersFormContainer'
+import RedditIndexContainer from '../react/containers/RedditIndexContainer'
+import RedditShowContainer from '../react/containers/RedditShowContainer'
 import NavBar from '../react/components/NavBar'
 
 const Index = props => {
@@ -17,6 +19,8 @@ const Index = props => {
         <Route path='prompts/:id' component={PromptsShowContainer} />
         <Route path='users/:id' component={UsersShowContainer} />
         <Route path='prompts/:id/new' component={AnswersFormContainer} />
+        <Route path='reddit' component={RedditIndexContainer} />
+        <Route path='reddit/:id' component={RedditShowContainer} />
       </Route>
     </Router>
   );
