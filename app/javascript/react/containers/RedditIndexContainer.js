@@ -7,6 +7,12 @@ class RedditIndexContainer extends Component {
     this.state = {
       prompts: []
     }
+
+  this.addNewPrompt = this.addNewPrompt.bind(this)
+  }
+
+  addNewPrompt(event) {
+
   }
 
   componentDidMount(){
@@ -38,6 +44,7 @@ class RedditIndexContainer extends Component {
           description={prompt.data.title}
           handle={prompt.data.author}
           date_made="test date"
+          onClick={this.addNewPrompt}
         />
       )
     })

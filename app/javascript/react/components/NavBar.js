@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, browserHistory } from 'react-router'
+import { Link, browserHistory, Redirect } from 'react-router'
 
 class NavBar extends Component {
   constructor(props){
@@ -33,18 +33,43 @@ class NavBar extends Component {
         current_user: current_user.user,
         recent_answer: current_user.user.recent_answer
       });
-      debugger;
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
 
-  // componentWillReceiveProps(){
-  //   if (this.state.recent_answer === false) {
-  //     browserHistory.push('/')
-  //   }
-  // }
+  componentWillReceiveProps(){
+    fetch('/api/v1/users.json', {
+      credentials: 'same-origin'
+    })
+    .then(response => {
+      if (response.ok) {;
+        return response;
+      } else {
+        let errorMessage = `${response.status} (${response.statusText})`,
+            error = new Error(errorMessage);
+        throw(error);
+      }
+    })
+    .then(response => response.json())
+    .then(current_user => {
+      this.setState({
+        recent_answer: current_user.user.recent_answer
+      });
+
+      // causing infinite loop
+    })
+    .catch(error => console.error(`Error in fetch: ${error.message}`));
+    if (this.state.recent_answer === false) {
+      // browserHistory.push('/prompts/random')
+      window.location='/prompts/random'
+    }
+  }
 
   render() {
+    // let redirect_check
+    // if (this.state.recent_answer === false) {
+    //   redirect_check = <Redirect to="/prompts/random" />
+    // }
     return (
       <div>
         <nav className="navbar navbar-default">
@@ -61,7 +86,7 @@ class NavBar extends Component {
           </div>
         </nav>
         <div className="content">
-          {this.props.children}
+          {React.cloneElement(this.props.children, {recent_answer: this.state.recent_answer})}
         </div>
       </div>
     )

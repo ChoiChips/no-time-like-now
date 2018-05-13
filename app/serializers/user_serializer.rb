@@ -8,7 +8,7 @@ class UserSerializer < ActiveModel::Serializer
   end
 
   def recent_answer
-    most_recent_answer = Answer.where(user: current_user).order('created_at DESC').last
+    most_recent_answer = Answer.where(user: current_user).order('created_at DESC').first
 
     if most_recent_answer.nil?
       return false
