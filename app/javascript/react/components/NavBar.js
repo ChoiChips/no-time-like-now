@@ -56,7 +56,7 @@ class NavBar extends Component {
         recent_answer: current_user.user.recent_answer
       });
 
-      // causing infinite loop
+      // was causing infinite loop with browserHistory
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
     if (this.state.recent_answer === false) {

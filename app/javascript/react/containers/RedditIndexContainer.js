@@ -8,12 +8,13 @@ class RedditIndexContainer extends Component {
       prompts: []
     }
 
-  this.addNewPrompt = this.addNewPrompt.bind(this)
+  // this.addNewPrompt = this.addNewPrompt.bind(this)
   }
 
-  addNewPrompt(event) {
-
-  }
+  // addNewPrompt(submission) {
+  //   event.preventDefault();
+  //
+  // }
 
   componentDidMount(){
     fetch('https://www.reddit.com/r/writingprompts/hot.json')
@@ -39,12 +40,12 @@ class RedditIndexContainer extends Component {
     let displayedPrompts = this.state.prompts.map( (prompt) =>{
       return (
         <RedditPromptsTile
-          key={prompt.id}
-          id={prompt.id}
+          key={prompt.data.id}
+          id={prompt.data.id}
           description={prompt.data.title}
           handle={prompt.data.author}
           date_made="test date"
-          onClick={this.addNewPrompt}
+          // addNewPrompt={this.addNewPrompt}
         />
       )
     })

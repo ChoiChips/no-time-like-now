@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import RedditPromptsShow from "../components/RedditPromptsShow"
+import RedditShow from "../components/RedditShow"
 import { Link } from 'react-router';
 
 import AnswersTile from '../components/AnswersTile'
@@ -16,7 +16,7 @@ class RedditShowContainer extends Component {
   componentDidMount() {
     let promptId = this.props.params.id
 
-    fetch(`/api/v1/prompts/${promptId}`, {
+    fetch(`/api/v1/reddits/${promptId}`, {
       credentials: 'same-origin'
     })
     .then(response => {
@@ -30,9 +30,10 @@ class RedditShowContainer extends Component {
       })
     .then(response => response.json())
     .then(prompt => {
+      debugger;
       this.setState ({
-        prompt: prompt.prompt,
-        answers: prompt.prompt.answers
+        prompt: prompt
+        // answers: prompt.prompt.answers
       })
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`))
@@ -54,16 +55,16 @@ class RedditShowContainer extends Component {
     return(
       <div className="row">
         <div className="columns medium-11 medium-centered">
-          {/* <RedditPromptsShow
+          <RedditShow
             key={this.state.prompt.id}
             id={this.state.prompt.id}
             handle={this.state.prompt.handle}
             description={this.state.prompt.description}
             date_made={this.state.prompt.date_made}
-          /> */}
+          />
         </div>
         <div className="text-center">
-          <h3><Link className="" to={`/prompts/${this.props.params.id}/new`}>Create New Answer</Link></h3>
+          <h3><Link className="" to={`/reddit/${this.props.params.id}/new`}>Create New Answer</Link></h3>
         </div>
 
         <div>{displayedAnswers}</div>
