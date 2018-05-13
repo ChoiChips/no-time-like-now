@@ -5,6 +5,8 @@ import UsersShowContainer from '../react/containers/UsersShowContainer'
 
 import PromptsIndexContainer from '../react/containers/PromptsIndexContainer'
 import PromptsShowContainer from '../react/containers/PromptsShowContainer'
+import PromptsNewContainer from '../react/containers/PromptsNewContainer'
+
 import AnswersFormContainer from '../react/containers/AnswersFormContainer'
 
 import RedditIndexContainer from '../react/containers/RedditIndexContainer'
@@ -22,6 +24,7 @@ const Index = props => {
         <IndexRoute component={PromptsIndexContainer} />
 
         <Route path='prompts' component={PromptsIndexContainer} />
+        <Route path='prompts/new' component={PromptsNewContainer} />
 
         <Route path='prompts/random' component={RandomFormContainer} />
 

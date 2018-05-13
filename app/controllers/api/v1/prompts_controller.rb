@@ -21,7 +21,7 @@ class Api::V1::PromptsController < ApiController
 
     if user_signed_in?
       if new_prompt.save
-        render json: ["Successfully added"]
+        render json: new_prompt
       else
         render json: new_prompt.errors.full_messages
       end

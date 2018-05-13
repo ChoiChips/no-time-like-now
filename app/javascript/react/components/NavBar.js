@@ -72,15 +72,15 @@ class NavBar extends Component {
     // }
     return (
       <div>
-        <nav className="navbar navbar-default">
+        <nav className="navbar navbar-default">j
           <div className="navbar-header">
             <Link className="navbar-brand" to="/">
               <button>Prompts</button>
             </Link>
-            <Link>
+            <Link to="/prompts/new">
               <button className="btn btn-info log">New Prompt</button>
             </Link>
-            <Link to="reddit">
+            <Link to="/reddit">
               <button className="btn btn-danger log">/r/WritingPrompts</button>
             </Link>
           </div>
