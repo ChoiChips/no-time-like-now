@@ -4,17 +4,20 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   namespace :api do
     namespace :v1 do
+      get '/prompts/random', to: 'prompts#random'
 
       resources :users, only: [:index, :show] do
         resources :prompts, only: [:index, :create]
         resources :answers, only: [:index]
       end
 
-      resources :prompts, only: [:index, :show]  do
+      resources :prompts, only: [:index, :show, :random]  do
         resources :answers, only: [:create]
       end
 
       resources :answers, only: [:show]
+
+      resources :reddits
     end
   end
 

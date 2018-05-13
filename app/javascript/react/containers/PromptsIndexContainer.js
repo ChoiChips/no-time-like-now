@@ -11,7 +11,9 @@ class PromptsIndexContainer extends Component {
   }
 
   componentDidMount(){
-    fetch('/api/v1/prompts.json')
+    fetch('/api/v1/prompts.json', {
+      credentials: 'same-origin'
+    })
     .then(response => {
       if (response.ok) {;
         return response;
@@ -29,6 +31,11 @@ class PromptsIndexContainer extends Component {
   }
 
   render() {
+    // debugger;
+    // one solution is to have Redirect in every component.
+    // if (this.props.recent_answer === false) {
+    //   browserHistory.push('/prompts/random')
+    // }
     let displayedPrompts = this.state.prompts.map( (prompt) =>{
       return (
         <PromptsTile

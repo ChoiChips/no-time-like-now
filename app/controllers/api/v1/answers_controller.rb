@@ -47,5 +47,6 @@ end
 #   In component will mount will redirect using routing features to posting page if they have to post, otherwise let route process and
 #   not change children.
 #
+# Browserhistory.push
 #
 # window.onfocus and onblur

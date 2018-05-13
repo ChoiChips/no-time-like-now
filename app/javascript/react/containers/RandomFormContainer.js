@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 
-class AnswersFormContainer extends Component {
+class RandomFormContainer extends Component {
   constructor(props){
     super(props)
     this.state = {
@@ -13,52 +13,25 @@ class AnswersFormContainer extends Component {
   }
 
   componentDidMount() {
-    // if standard prompt request
-    if (this.props.params.id) {
-
-      fetch(`/api/v1/prompts/${this.props.params.id}`, {
-        credentials: 'same-origin'
-      })
-      .then(response => {
-        if (response.ok) {
-          return response;
-        } else {
-          let errorMessage = `${response.status} (${response.statusText})`,
+    fetch(`/api/v1/prompts/random`, {
+      credentials: 'same-origin'
+    })
+    .then(response => {
+      if (response.ok) {
+        return response;
+      } else {
+        let errorMessage = `${response.status} (${response.statusText})`,
           error = new Error(errorMessage);
           throw(error);
         }
       })
-      .then(response => response.json())
-      .then(prompt => {
-        this.setState ({
-          prompt: prompt.prompt
-        })
+    .then(response => response.json())
+    .then(prompt => {
+      this.setState ({
+        prompt: prompt.prompt
       })
-      .catch(error => console.error(`Error in fetch: ${error.message}`))
-
-    // // if random prompt request
-    // } else if (this.props.route.path === "prompts/random/new") {
-    //
-    //   fetch('/api/v1/prompts/random', {
-    //     credentials: 'same-origin'
-    //   })
-    //   .then(response => {
-    //     if (response.ok) {
-    //       return response;
-    //     } else {
-    //       let errorMessage = `${response.status} (${response.statusText})`,
-    //       error = new Error(errorMessage);
-    //       throw(error);
-    //     }
-    //   })
-    //   .then(response => response.json())
-    //   .then(prompt => {
-    //     this.setState ({
-    //       prompt: prompt.prompt
-    //     })
-    //   })
-    //   .catch(error => console.error(`Error in fetch: ${error.message}`))
-    }
+    })
+    .catch(error => console.error(`Error in fetch: ${error.message}`))
   }
 
   handleChange(event) {
@@ -82,7 +55,6 @@ class AnswersFormContainer extends Component {
           prompt_id: this.state.prompt.id
         }
       }
-
 
       fetch(`/api/v1/prompts/${this.state.prompt.id}/answers`, {
         credentials: 'same-origin',
@@ -123,8 +95,14 @@ class AnswersFormContainer extends Component {
       submitButton = <input type="submit" value="Submit" />
     }
 
+    let recent_answer
+    if (this.props.recent_answer === false) {
+      recent_answer = "Please respond to your daily prompt"
+    }
+
     return(
       <div className="row">
+        <h3 className="text-center">{recent_answer}</h3>
         <div className="columns medium-12 large-12 medium-centered">
           <form onSubmit={this.handleSubmit}>
             <label>
@@ -142,4 +120,4 @@ class AnswersFormContainer extends Component {
   }
 }
 
-export default AnswersFormContainer
+export default RandomFormContainer

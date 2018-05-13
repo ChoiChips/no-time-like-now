@@ -1,22 +1,28 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 
-class AnswersFormContainer extends Component {
+class RedditFormContainer extends Component {
   constructor(props){
     super(props)
     this.state = {
-      prompt: '',
-      answer:  ''
+      answer:  '',
+      prompt: {}
     }
   this.handleChange = this.handleChange.bind(this)
   this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentDidMount() {
-    // if standard prompt request
-    if (this.props.params.id) {
+    let submission = {
+      prompt: {
+        handle: this.props.location.state.handle,
+        description: this.props.location.state.description,
+        date_made: this.props.location.state.date_made
+      }
+    }
 
-      fetch(`/api/v1/prompts/${this.props.params.id}`, {
+    if (this.props.params.id) {
+      fetch(`/api/v1/reddits/${this.props.params.id}`, {
         credentials: 'same-origin'
       })
       .then(response => {
@@ -31,33 +37,33 @@ class AnswersFormContainer extends Component {
       .then(response => response.json())
       .then(prompt => {
         this.setState ({
-          prompt: prompt.prompt
+          prompt: prompt.reddit
         })
       })
       .catch(error => console.error(`Error in fetch: ${error.message}`))
 
-    // // if random prompt request
-    // } else if (this.props.route.path === "prompts/random/new") {
-    //
-    //   fetch('/api/v1/prompts/random', {
-    //     credentials: 'same-origin'
-    //   })
-    //   .then(response => {
-    //     if (response.ok) {
-    //       return response;
-    //     } else {
-    //       let errorMessage = `${response.status} (${response.statusText})`,
-    //       error = new Error(errorMessage);
-    //       throw(error);
-    //     }
-    //   })
-    //   .then(response => response.json())
-    //   .then(prompt => {
-    //     this.setState ({
-    //       prompt: prompt.prompt
-    //     })
-    //   })
-    //   .catch(error => console.error(`Error in fetch: ${error.message}`))
+    } else {
+
+      fetch(`/api/v1/reddits`, {
+        credentials: 'same-origin',
+        method: 'POST',
+        body: JSON.stringify(submission),
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
+      })
+      .then(response => {
+        if (response.ok) {
+          return response;
+        } else {
+          let errorMessage = `${response.status} (${response.statusText})`,
+          error = new Error(errorMessage);
+          throw(error);
+        }
+      })
+      .then(response => response.json())
+      .then(body => {
+        this.setState({ prompt: body[0] });
+      })
+      .catch(error => console.error(`Error in fetch (submitting new Reddit prompt): ${error.message}`))
     }
   }
 
@@ -83,8 +89,7 @@ class AnswersFormContainer extends Component {
         }
       }
 
-
-      fetch(`/api/v1/prompts/${this.state.prompt.id}/answers`, {
+      fetch(`/api/v1/reddits/${this.state.prompt.id}/answers`, {
         credentials: 'same-origin',
         method: 'POST',
         body: JSON.stringify(submission),
@@ -92,7 +97,7 @@ class AnswersFormContainer extends Component {
       })
       .then(response => {
         if (response.ok) {
-          window.location.href = `http://localhost:3000/prompts/${this.state.prompt.id}`
+          window.location.href = `http://localhost:3000/reddit/${this.state.prompt.id}`
         } else {
           let errorMessage = `${response.status} (${response.statusText})`,
           error = new Error(errorMessage);
@@ -128,7 +133,7 @@ class AnswersFormContainer extends Component {
         <div className="columns medium-12 large-12 medium-centered">
           <form onSubmit={this.handleSubmit}>
             <label>
-              <h1>{this.state.prompt.description}</h1>
+              <h1>{this.props.location.state.description}</h1>
               {message}
               <textarea rows='25' cols='70' style={{border:"none"}} value={this.state.answer} onChange={this.handleChange} />
             </label>
@@ -142,4 +147,4 @@ class AnswersFormContainer extends Component {
   }
 }
 
-export default AnswersFormContainer
+export default RedditFormContainer

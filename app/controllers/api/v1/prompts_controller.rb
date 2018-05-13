@@ -6,6 +6,11 @@ class Api::V1::PromptsController < ApiController
     render json: Prompt.all
   end
 
+  def random
+    random_prompt = Prompt.all.sample
+    render json: random_prompt
+  end
+
   def show
     render json: Prompt.find(params[:id]), serializer: PromptShowSerializer
   end
@@ -24,6 +29,7 @@ class Api::V1::PromptsController < ApiController
       render json: ["Please sign in first"]
     end
   end
+
 
   private
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_10_125957) do
+ActiveRecord::Schema.define(version: 2018_05_13_164923) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,12 @@ ActiveRecord::Schema.define(version: 2018_05_10_125957) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_prompts_on_user_id"
+  end
+
+  create_table "reddits", force: :cascade do |t|
+    t.text "description", null: false
+    t.string "handle", null: false
+    t.string "date_made", null: false
   end
 
   create_table "users", force: :cascade do |t|
