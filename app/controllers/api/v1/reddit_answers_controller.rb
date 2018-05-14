@@ -1,4 +1,9 @@
-class Api::V1::AnswersController < ApiController
+class Api::V1::RedditAnswersController < ApiController
+
+  def index
+    reddit = Reddit.find(params[:reddit_id])
+    render json: RedditAnswer.where(reddit: reddit)
+  end
 
   def show
     render json: RedditAnswer.find(params[:id])
