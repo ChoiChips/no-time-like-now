@@ -38,14 +38,17 @@ class RedditIndexContainer extends Component {
 
   render() {
     let displayedPrompts = this.state.prompts.map( (prompt) =>{
+      let utcSeconds = prompt.data.created_utc
+      let dateString = (new Date(utcSeconds * 1000)).toLocaleDateString()
+
       return (
         <RedditPromptsTile
           key={prompt.data.id}
           id={prompt.data.id}
           description={prompt.data.title}
           handle={prompt.data.author}
-          date_made="test date"
-          // addNewPrompt={this.addNewPrompt}
+          date_made={dateString}
+          url={prompt.data.url}
         />
       )
     })

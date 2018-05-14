@@ -4,6 +4,7 @@ class CreateReddit < ActiveRecord::Migration[5.2]
       t.text :description, null: false
       t.string :handle, null: false
       t.string :date_made, null: false
+      t.string :url, null: false
 
     end
   end

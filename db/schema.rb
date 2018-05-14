@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 2018_05_13_202352) do
     t.text "description", null: false
     t.string "handle", null: false
     t.string "date_made", null: false
+    t.string "url", null: false
   end
 
   create_table "users", force: :cascade do |t|

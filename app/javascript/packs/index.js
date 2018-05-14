@@ -36,6 +36,7 @@ const Index = props => {
         <Route path='reddit' component={RedditIndexContainer} />
         <Route path='reddit/new' component={RedditFormContainer} />
         <Route path='reddit/:id' component={RedditShowContainer} />
+        <Route path='reddit/:id/new' component={RedditFormContainer} />
       </Route>
     </Router>
   );

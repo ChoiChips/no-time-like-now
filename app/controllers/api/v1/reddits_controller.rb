@@ -32,6 +32,6 @@ class Api::V1::RedditsController < ApiController
   private
 
   def prompt_params
-    params.require(:prompt).permit(:description, :handle, :date_made)
+    params.require(:prompt).permit(:description, :handle, :date_made, :url)
   end
 end

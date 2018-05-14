@@ -1,5 +1,5 @@
 class RedditShowSerializer < ActiveModel::Serializer
-  attributes :id, :description, :handle, :date_made, :user_answers
+  attributes :id, :description, :handle, :date_made, :url, :user_answers
   has_many :reddit_answers
 
   def user_answers
