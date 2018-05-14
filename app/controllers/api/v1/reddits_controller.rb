@@ -12,7 +12,7 @@ class Api::V1::RedditsController < ApiController
   end
 
   def show
-    render json: Reddit.find(params[:id])
+    render json: Reddit.find(params[:id]), serializer: RedditShowSerializer
   end
 
   def create

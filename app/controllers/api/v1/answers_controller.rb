@@ -8,6 +8,7 @@ class Api::V1::AnswersController < ApiController
   def create
     new_answer = Answer.new(answer_params)
     new_answer.user = current_user
+    new_answer.prompt = Prompt.find(params[:prompt_id])
 
     if user_signed_in?
       if new_answer.save
@@ -24,7 +25,7 @@ class Api::V1::AnswersController < ApiController
   private
 
   def answer_params
-    params.require(:answer).permit(:answer, :prompt_id)
+    params.require(:answer).permit(:answer)
   end
 end
 

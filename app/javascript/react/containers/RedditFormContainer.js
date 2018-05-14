@@ -22,6 +22,7 @@ class RedditFormContainer extends Component {
     }
 
     if (this.props.params.id) {
+      debugger;
       fetch(`/api/v1/reddits/${this.props.params.id}`, {
         credentials: 'same-origin'
       })
@@ -51,6 +52,7 @@ class RedditFormContainer extends Component {
         headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
       })
       .then(response => {
+        debugger;
         if (response.ok) {
           return response;
         } else {
@@ -61,7 +63,13 @@ class RedditFormContainer extends Component {
       })
       .then(response => response.json())
       .then(body => {
-        this.setState({ prompt: body[0] });
+        debugger;
+        if (body[0] === undefined) {
+          this.setState({ prompt: body })
+        } else {
+          this.setState({ prompt: body[0] });
+        }
+        debugger;
       })
       .catch(error => console.error(`Error in fetch (submitting new Reddit prompt): ${error.message}`))
     }
@@ -82,14 +90,14 @@ class RedditFormContainer extends Component {
     if ( confirm("Are you sure you wish to submit?") == false ) {
       return false ;
     } else {
+      debugger;
       let submission = {
         answer: {
-          answer: this.state.answer,
-          prompt_id: this.state.prompt.id
+          answer: this.state.answer
         }
       }
 
-      fetch(`/api/v1/reddits/${this.state.prompt.id}/answers`, {
+      fetch(`/api/v1/reddits/${this.state.prompt.id}/reddit_answers`, {
         credentials: 'same-origin',
         method: 'POST',
         body: JSON.stringify(submission),

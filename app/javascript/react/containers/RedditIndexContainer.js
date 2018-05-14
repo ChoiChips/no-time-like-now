@@ -53,7 +53,7 @@ class RedditIndexContainer extends Component {
     return (
       <div>
         <div className="row prompt-container">
-          <h1 className="name text-center">All Prompts</h1>
+          <h1 className="name text-center">Reddit's /r/WritingPrompts</h1>
           <ul className="text-left">
             <li>WP - Writing Prompt: No restrictions</li>
             <li>EU - Established Universe: Based on existing fiction </li>
