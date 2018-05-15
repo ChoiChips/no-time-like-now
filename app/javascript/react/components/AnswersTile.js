@@ -8,9 +8,9 @@ const AnswersTile = (props) => {
       <div className="user-sig">
         <Link className="name" to={`/users/${props.id}`}>{props.handle}</Link> on {props.date_made}
       </div>
-      <Link className="prompts-tile" to={`/prompts/${props.id}`}>
+      <Link className="prompts-tile" to={`/answers/${props.id}`}>
         <div className="content">
-          <h3 className="description">
+          <h3 className="answer">
             {props.answer}
           </h3>
         </div>
