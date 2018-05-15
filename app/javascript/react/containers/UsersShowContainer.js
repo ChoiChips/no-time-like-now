@@ -81,7 +81,7 @@ class UsersShowContainer extends Component {
         <div className="row spot-container">
           <h1 className="recent-activity">Recent Activity</h1>
           <div>
-            <h3 className="text-left">Prompts</h3>
+            <h3 className="recent-activity">Your Prompts</h3>
             <div className="columns">
               {prompts}
             </div>
@@ -92,15 +92,15 @@ class UsersShowContainer extends Component {
       recentActivity =
         <div className="row spot-container">
           <h1 className="recent-activity">Recent Activity</h1>
+          <div className="columns answers-chart">
+            <AnswersChart
+              data={this.state.chartData}
+            />
+          </div>
           <div>
-            <h3 className="text-left">Answers</h3>
+            <h3 className="recent-activity">Your Answers</h3>
             <div className="columns">
               {answers}
-            </div>
-            <div className="columns answers-chart">
-              <AnswersChart
-                data={this.state.chartData}
-              />
             </div>
           </div>
         </div>
@@ -109,18 +109,18 @@ class UsersShowContainer extends Component {
       recentActivity = <div className="row spot-container">
         <h1 className="recent-activity">Recent Activity</h1>
         <div>
-          <h3 className="text-left">Prompts</h3>
-          <div className="columns">
-            {prompts}
-          </div>
-          <h3 className="text-left">Answers</h3>
-          <div className="columns">
-            {answers}
-          </div>
           <div className="columns answers-chart">
             <AnswersChart
               data={this.state.chartData}
             />
+          </div>
+          <h3 className="recent-activity">Your Prompts</h3>
+          <div className="columns">
+            {prompts}
+          </div>
+          <h3 className="recent-activity">Your Answers</h3>
+          <div className="columns">
+            {answers}
           </div>
         </div>
       </div>
@@ -133,11 +133,11 @@ class UsersShowContainer extends Component {
       // <div className="row spot-container">
       //   <h1 className="recent-activity">Recent Activity</h1>
       //   <div>
-      //     <h3 className="text-left">Prompts</h3>
+      //     <h3 className="text-center">Prompts</h3>
       //     <div className="columns">
       //       {prompts}
       //     </div>
-      //     <h3 className="text-left">Answers</h3>
+      //     <h3 className="text-center">Answers</h3>
       //     <div className="columns">
       //       {answers}
       //     </div>

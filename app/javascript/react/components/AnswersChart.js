@@ -7,14 +7,14 @@ const AnswersChart = (props) => {
   let oneWeekAgo = new Date(today.getTime() - (60*60*24*7*1000));
 
   let options = {
-    vAxis: { title: 'Word Count' },
+    vAxis: { title: 'Word Count Per Entry' },
     hAxis: { title: 'Date', minValue: oneWeekAgo, maxValue: today},
+    titlePosition: 'none',
     legend: 'none'
   }
 
   return (
     <div>
-      <h3 className="text-center">Word Count Over Time</h3>
       <Chart
         chartType="ScatterChart"
         data={props.data}
