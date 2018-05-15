@@ -17,7 +17,9 @@ Rails.application.routes.draw do
 
       resources :answers, only: [:show]
 
-      resources :reddits
+      resources :reddits do
+        resources :reddit_answers
+      end
     end
   end
 

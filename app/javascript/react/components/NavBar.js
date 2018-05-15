@@ -5,8 +5,8 @@ class NavBar extends Component {
   constructor(props){
     super(props)
     this.state = {
-      current_user: {},
-      recent_answer: false
+      currentUser: {},
+      recentAnswer: false
     }
   }
 
@@ -28,10 +28,10 @@ class NavBar extends Component {
       }
     })
     .then(response => response.json())
-    .then(current_user => {
+    .then(currentUser => {
       this.setState({
-        current_user: current_user.user,
-        recent_answer: current_user.user.recent_answer
+        currentUser: currentUser.user,
+        recentAnswer: currentUser.user.recent_answer
       });
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
@@ -51,15 +51,15 @@ class NavBar extends Component {
       }
     })
     .then(response => response.json())
-    .then(current_user => {
+    .then(currentUser => {
       this.setState({
-        recent_answer: current_user.user.recent_answer
+        recentAnswer: currentUser.user.recent_answer
       });
 
       // was causing infinite loop with browserHistory
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
-    if (this.state.recent_answer === false) {
+    if (this.state.recentAnswer === false) {
       // browserHistory.push('/prompts/random')
       window.location='/prompts/random'
     }
@@ -67,13 +67,17 @@ class NavBar extends Component {
 
   render() {
     // let redirect_check
-    // if (this.state.recent_answer === false) {
+    // if (this.state.recentAnswer === false) {
     //   redirect_check = <Redirect to="/prompts/random" />
     // }
+
     return (
       <div>
-        <nav className="navbar navbar-default">j
+        <nav className="navbar navbar-default">
           <div className="navbar-header">
+            <Link className="navbar-brand" to={`/users/${this.state.currentUser.id}`}>
+              <button>Profile</button>
+            </Link>
             <Link className="navbar-brand" to="/">
               <button>Prompts</button>
             </Link>
@@ -86,7 +90,7 @@ class NavBar extends Component {
           </div>
         </nav>
         <div className="content">
-          {React.cloneElement(this.props.children, {recent_answer: this.state.recent_answer})}
+          {React.cloneElement(this.props.children, {recentAnswer: this.state.recentAnswer})}
         </div>
       </div>
     )

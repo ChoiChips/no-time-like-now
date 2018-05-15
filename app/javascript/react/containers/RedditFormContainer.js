@@ -13,36 +13,16 @@ class RedditFormContainer extends Component {
   }
 
   componentDidMount() {
-    let submission = {
-      prompt: {
-        handle: this.props.location.state.handle,
-        description: this.props.location.state.description,
-        date_made: this.props.location.state.date_made
-      }
-    }
 
-    if (this.props.params.id) {
-      fetch(`/api/v1/reddits/${this.props.params.id}`, {
-        credentials: 'same-origin'
-      })
-      .then(response => {
-        if (response.ok) {
-          return response;
-        } else {
-          let errorMessage = `${response.status} (${response.statusText})`,
-          error = new Error(errorMessage);
-          throw(error);
+    if (this.props.location.state !== undefined) {
+      let submission = {
+        prompt: {
+          handle: this.props.location.state.handle,
+          description: this.props.location.state.description,
+          date_made: this.props.location.state.date_made,
+          url: this.props.location.state.url
         }
-      })
-      .then(response => response.json())
-      .then(prompt => {
-        this.setState ({
-          prompt: prompt.reddit
-        })
-      })
-      .catch(error => console.error(`Error in fetch: ${error.message}`))
-
-    } else {
+      }
 
       fetch(`/api/v1/reddits`, {
         credentials: 'same-origin',
@@ -61,9 +41,37 @@ class RedditFormContainer extends Component {
       })
       .then(response => response.json())
       .then(body => {
-        this.setState({ prompt: body[0] });
+        if (body[0] === undefined) {
+          this.setState({ prompt: body })
+        } else {
+          this.setState({ prompt: body[0] });
+        }
       })
       .catch(error => console.error(`Error in fetch (submitting new Reddit prompt): ${error.message}`))
+
+    } else if (this.props.params.id) {
+      debugger;
+      fetch(`/api/v1/reddits/${this.props.params.id}`, {
+        credentials: 'same-origin'
+      })
+      .then(response => {
+        if (response.ok) {
+          return response;
+        } else {
+          window.location='/'
+
+          let errorMessage = `${response.status} (${response.statusText})`,
+          error = new Error(errorMessage);
+          throw(error);
+        }
+      })
+      .then(response => response.json())
+      .then(prompt => {
+        this.setState ({
+          prompt: prompt.reddit
+        })
+      })
+      .catch(error => console.error(`Error in fetch: ${error.message}`))
     }
   }
 
@@ -81,15 +89,14 @@ class RedditFormContainer extends Component {
 
     if ( confirm("Are you sure you wish to submit?") == false ) {
       return false ;
-    } else {
+    } else {;
       let submission = {
         answer: {
-          answer: this.state.answer,
-          prompt_id: this.state.prompt.id
+          answer: this.state.answer
         }
       }
 
-      fetch(`/api/v1/reddits/${this.state.prompt.id}/answers`, {
+      fetch(`/api/v1/reddits/${this.state.prompt.id}/reddit_answers`, {
         credentials: 'same-origin',
         method: 'POST',
         body: JSON.stringify(submission),
@@ -133,7 +140,7 @@ class RedditFormContainer extends Component {
         <div className="columns medium-12 large-12 medium-centered">
           <form onSubmit={this.handleSubmit}>
             <label>
-              <h1>{this.props.location.state.description}</h1>
+              <a target="_blank" href={this.state.prompt.url}><h1>{this.state.prompt.description}</h1></a>
               {message}
               <textarea rows='25' cols='70' style={{border:"none"}} value={this.state.answer} onChange={this.handleChange} />
             </label>

@@ -8,6 +8,7 @@ import PromptsShowContainer from '../react/containers/PromptsShowContainer'
 import PromptsNewContainer from '../react/containers/PromptsNewContainer'
 
 import AnswersFormContainer from '../react/containers/AnswersFormContainer'
+import AnswersShow from '../react/components/AnswersShow'
 
 import RedditIndexContainer from '../react/containers/RedditIndexContainer'
 import RedditShowContainer from '../react/containers/RedditShowContainer'
@@ -33,8 +34,12 @@ const Index = props => {
 
         <Route path='users/:id' component={UsersShowContainer} />
 
+        <Route path='users/:id/prompt' component={PromptsShowContainer} />
+        <Route path='answers/:id' component={AnswersShow} />
+
         <Route path='reddit' component={RedditIndexContainer} />
         <Route path='reddit/new' component={RedditFormContainer} />
+        <Route path='reddit/:id/new' component={RedditFormContainer} />
         <Route path='reddit/:id' component={RedditShowContainer} />
       </Route>
     </Router>

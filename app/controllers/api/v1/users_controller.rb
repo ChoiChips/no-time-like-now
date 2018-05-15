@@ -14,9 +14,6 @@ class Api::V1::UsersController < ApiController
     user = User.find(params[:id])
     prompts = user.prompts
     answers = user.answers
-    render json: {
-      prompts: prompts,
-      answers: answers
-    }
+    render json: user
   end
 end

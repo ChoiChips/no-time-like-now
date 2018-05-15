@@ -30,6 +30,11 @@ class RandomFormContainer extends Component {
       this.setState ({
         prompt: prompt.prompt
       })
+      $(document).ready(function() {
+        setTimeout(function(){
+          $("#myModal").foundation('reveal', 'open');
+        }, 0);
+      });
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`))
   }
@@ -95,26 +100,25 @@ class RandomFormContainer extends Component {
       submitButton = <input type="submit" value="Submit" />
     }
 
-    let recent_answer
-    if (this.props.recent_answer === false) {
-      recent_answer = "Please respond to your daily prompt"
+    let recentAnswer, forcedPrompt
+    if (this.props.recentAnswer === false) {
+      recentAnswer = "Please respond to your daily prompt"
+      forcedPrompt = "close_on_background_click:false;close_on_esc:false;"
     }
 
     return(
-      <div className="row">
-        <h3 className="text-center">{recent_answer}</h3>
-        <div className="columns medium-12 large-12 medium-centered">
-          <form onSubmit={this.handleSubmit}>
-            <label>
-              <h1>{this.state.prompt.description}</h1>
-              {message}
-              <textarea rows='25' cols='70' style={{border:"none"}} value={this.state.answer} onChange={this.handleChange} />
-            </label>
-            <div>
-            </div>
-            {submitButton}
-          </form>
-        </div>
+      <div id="myModal" data-options={forcedPrompt} data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog" className="reveal-modal text-center">
+        <h3 className="text-center">{recentAnswer}</h3>
+        <form onSubmit={this.handleSubmit}>
+          <label>
+            <h1>{this.state.prompt.description}</h1>
+            {message}
+            <textarea rows='25' cols='70' style={ {border: "none"} } value={this.state.answer} onChange={this.handleChange} />
+          </label>
+          <div>
+          </div>
+          {submitButton}
+        </form>
       </div>
     )
   }

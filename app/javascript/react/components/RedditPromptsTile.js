@@ -34,7 +34,8 @@ const RedditPromptsTile = (props) => {
           state: {
             handle: props.handle,
             description: props.description,
-            date_made: props.date_made
+            date_made: props.date_made,
+            url: props.url
           }
         }}>
         <div className="content">

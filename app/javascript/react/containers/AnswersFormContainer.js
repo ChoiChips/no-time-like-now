@@ -78,11 +78,9 @@ class AnswersFormContainer extends Component {
     } else {
       let submission = {
         answer: {
-          answer: this.state.answer,
-          prompt_id: this.state.prompt.id
+          answer: this.state.answer
         }
       }
-
 
       fetch(`/api/v1/prompts/${this.state.prompt.id}/answers`, {
         credentials: 'same-origin',

@@ -30,10 +30,9 @@ class RedditShowContainer extends Component {
       })
     .then(response => response.json())
     .then(prompt => {
-      debugger;
       this.setState ({
-        prompt: prompt
-        // answers: prompt.prompt.answers
+        prompt: prompt.reddit,
+        answers: prompt.reddit.reddit_answers
       })
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`))
