@@ -1,5 +1,7 @@
 class AnswerSerializer < ActiveModel::Serializer
-  attributes :id, :answer, :date_made, :handle
+  attributes :id, :answer, :date_made, :handle, :user_id
+
+  belongs_to :prompt
 
   def handle
     user = User.find(object.user_id)
