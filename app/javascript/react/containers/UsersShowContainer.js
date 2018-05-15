@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
+
 import PromptsTile from '../components/PromptsTile';
 import AnswersTile from '../components/AnswersTile';
+import AnswersChart from '../components/AnswersChart';
 
 class UsersShowContainer extends Component {
   constructor(props){
     super(props)
     this.state = {
       prompts: [],
-      answers: []
+      answers: [],
+      chartData: {}
     }
   }
 
@@ -27,9 +30,18 @@ class UsersShowContainer extends Component {
       })
       .then(response => response.json())
       .then(body => {
+        let chartData = body.user.answers.map( (answer) => {
+          let splitDate = answer.date_made.split("/")
+          let date = new Date(splitDate[2], splitDate[0] - 1, splitDate[1])
+          return (
+            [date, answer.length]
+          )
+        })
+        chartData.unshift(["Date", "Word Count"])
         this.setState({
           prompts: body.user.prompts,
-          answers: body.user.answers
+          answers: body.user.answers,
+          chartData: chartData
          });
       })
       .catch(error => console.error(`Error in fetch: ${error.message}`));
@@ -47,6 +59,7 @@ class UsersShowContainer extends Component {
         />
       )
     })
+
     let answers = this.state.answers.map( (answer) =>{
       return (
         <AnswersTile
@@ -58,18 +71,83 @@ class UsersShowContainer extends Component {
       )
     })
 
-    return (
-      <div className="row spot-container">
-        <h1 className="recent-activity">Recent Activity</h1>
-        <h3 className="text-left">Prompts</h3>
-        <div className="columns">
-          {prompts}
-        </div>
-        <h3 className="text-left">Answers</h3>
-        <div className="columns">
-          {answers}
+    let recentActivity = <div></div>
+
+    if (this.state.prompts.length === 0 && this.state.answers.length === 0) {
+      recentActivity = <h1 className="recent-activity">No Recent Activity</h1>
+
+    } else if (this.state.prompts.length !== 0 && this.state.answers.length === 0) {
+      recentActivity =
+        <div className="row spot-container">
+          <h1 className="recent-activity">Recent Activity</h1>
+          <div>
+            <h3 className="text-left">Prompts</h3>
+            <div className="columns">
+              {prompts}
+            </div>
         </div>
       </div>
+
+    } else if (this.state.prompts.length === 0 && this.state.answers.length !== 0) {
+      recentActivity =
+        <div className="row spot-container">
+          <h1 className="recent-activity">Recent Activity</h1>
+          <div>
+            <h3 className="text-left">Answers</h3>
+            <div className="columns">
+              {answers}
+            </div>
+            <div className="columns answers-chart">
+              <AnswersChart
+                data={this.state.chartData}
+              />
+            </div>
+          </div>
+        </div>
+
+    } else if (this.state.prompts.length !== 0 && this.state.answers.length !== 0) {
+      recentActivity = <div className="row spot-container">
+        <h1 className="recent-activity">Recent Activity</h1>
+        <div>
+          <h3 className="text-left">Prompts</h3>
+          <div className="columns">
+            {prompts}
+          </div>
+          <h3 className="text-left">Answers</h3>
+          <div className="columns">
+            {answers}
+          </div>
+          <div className="columns answers-chart">
+            <AnswersChart
+              data={this.state.chartData}
+            />
+          </div>
+        </div>
+      </div>
+    }
+
+    return (
+      <div>
+        {recentActivity}
+      </div>
+      // <div className="row spot-container">
+      //   <h1 className="recent-activity">Recent Activity</h1>
+      //   <div>
+      //     <h3 className="text-left">Prompts</h3>
+      //     <div className="columns">
+      //       {prompts}
+      //     </div>
+      //     <h3 className="text-left">Answers</h3>
+      //     <div className="columns">
+      //       {answers}
+      //     </div>
+      //     <div className="columns answers-chart">
+      //       <AnswersChart
+      //         data={this.state.chartData}
+      //       />
+      //     </div>
+      //   </div>
+      // </div>
     );
   }
 }
