@@ -1,5 +1,5 @@
 class AnswerSerializer < ActiveModel::Serializer
-  attributes :id, :answer, :date_made, :handle, :user_id
+  attributes :id, :answer, :date_made, :handle, :user_id, :length
 
   belongs_to :prompt
 
@@ -11,5 +11,9 @@ class AnswerSerializer < ActiveModel::Serializer
   def date_made
     utc = object.created_at
     date = utc.strftime("%m/%d/%Y")
+  end
+
+  def length
+    object.answer.split.size
   end
 end
