@@ -8,6 +8,7 @@ class UsersShowContainer extends Component {
   constructor(props){
     super(props)
     this.state = {
+      user: {},
       prompts: [],
       answers: [],
       chartData: {}
@@ -38,7 +39,9 @@ class UsersShowContainer extends Component {
           )
         })
         chartData.unshift(["Date", "Word Count"])
+
         this.setState({
+          user: body.user,
           prompts: body.user.prompts,
           answers: body.user.answers,
           chartData: chartData
@@ -74,14 +77,14 @@ class UsersShowContainer extends Component {
     let recentActivity = <div></div>
 
     if (this.state.prompts.length === 0 && this.state.answers.length === 0) {
-      recentActivity = <h1 className="recent-activity">No Recent Activity</h1>
+      recentActivity = <h1 className="recent-activity">{this.state.user.handle} Has No Recent Activity</h1>
 
     } else if (this.state.prompts.length !== 0 && this.state.answers.length === 0) {
       recentActivity =
         <div className="row spot-container">
-          <h1 className="recent-activity">Recent Activity</h1>
+          <h1 className="recent-activity">{this.state.user.handle}'s Recent Activity</h1>
           <div>
-            <h3 className="text-left">Prompts</h3>
+            <h3 className="recent-activity">Submitted Prompts</h3>
             <div className="columns">
               {prompts}
             </div>
@@ -91,36 +94,36 @@ class UsersShowContainer extends Component {
     } else if (this.state.prompts.length === 0 && this.state.answers.length !== 0) {
       recentActivity =
         <div className="row spot-container">
-          <h1 className="recent-activity">Recent Activity</h1>
+          <h1 className="recent-activity">{this.state.user.handle}'s Recent Activity</h1>
+          <div className="columns answers-chart">
+            <AnswersChart
+              data={this.state.chartData}
+            />
+          </div>
           <div>
-            <h3 className="text-left">Answers</h3>
+            <h3 className="recent-activity">Submitted Answers</h3>
             <div className="columns">
               {answers}
-            </div>
-            <div className="columns answers-chart">
-              <AnswersChart
-                data={this.state.chartData}
-              />
             </div>
           </div>
         </div>
 
     } else if (this.state.prompts.length !== 0 && this.state.answers.length !== 0) {
       recentActivity = <div className="row spot-container">
-        <h1 className="recent-activity">Recent Activity</h1>
+        <h1 className="recent-activity">{this.state.user.handle}'s Recent Activity</h1>
         <div>
-          <h3 className="text-left">Prompts</h3>
-          <div className="columns">
-            {prompts}
-          </div>
-          <h3 className="text-left">Answers</h3>
-          <div className="columns">
-            {answers}
-          </div>
           <div className="columns answers-chart">
             <AnswersChart
               data={this.state.chartData}
             />
+          </div>
+          <h3 className="recent-activity">Submitted Prompts</h3>
+          <div className="columns">
+            {prompts}
+          </div>
+          <h3 className="recent-activity">Submitted Answers</h3>
+          <div className="columns">
+            {answers}
           </div>
         </div>
       </div>
@@ -130,24 +133,6 @@ class UsersShowContainer extends Component {
       <div>
         {recentActivity}
       </div>
-      // <div className="row spot-container">
-      //   <h1 className="recent-activity">Recent Activity</h1>
-      //   <div>
-      //     <h3 className="text-left">Prompts</h3>
-      //     <div className="columns">
-      //       {prompts}
-      //     </div>
-      //     <h3 className="text-left">Answers</h3>
-      //     <div className="columns">
-      //       {answers}
-      //     </div>
-      //     <div className="columns answers-chart">
-      //       <AnswersChart
-      //         data={this.state.chartData}
-      //       />
-      //     </div>
-      //   </div>
-      // </div>
     );
   }
 }
