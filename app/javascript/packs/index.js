@@ -1,6 +1,8 @@
 import React from 'react';
 import {Router, browserHistory, Route, IndexRoute } from 'react-router';
 
+import LandingPage from '../react/containers/LandingPage'
+
 import UsersShowContainer from '../react/containers/UsersShowContainer'
 
 import PromptsIndexContainer from '../react/containers/PromptsIndexContainer'

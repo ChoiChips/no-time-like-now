@@ -9,7 +9,7 @@ class NavBar extends Component {
       recentAnswer: false
     }
   }
-  
+
   componentDidMount() {
     fetch('/api/v1/users.json', {
       credentials: 'same-origin'
@@ -51,12 +51,9 @@ class NavBar extends Component {
       this.setState({
         recentAnswer: currentUser.user.recent_answer
       });
-
-      // was causing infinite loop with browserHistory
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
     if (this.state.recentAnswer === false) {
-      // browserHistory.push('/prompts/random')
       window.location='/prompts/random'
     }
   }
