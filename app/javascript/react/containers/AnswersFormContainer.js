@@ -123,7 +123,7 @@ class AnswersFormContainer extends Component {
     let submitButton;
 
     if (this.state.answer.trim().length >= 100) {
-      submitButton = <input type="submit" value="Submit" />
+      submitButton = <input type="submit" value="Submit" className="button"/>
     }
 
     let user_id;
@@ -144,7 +144,7 @@ class AnswersFormContainer extends Component {
               <div>
                 {message}
               </div>
-              <textarea rows='25' cols='70' value={this.state.answer} onChange={this.handleChange} />
+              <textarea style={{fontSize: '25px'}} rows='17' cols='70' value={this.state.answer} onChange={this.handleChange} />
               {submitButton}
             </form>
           </div>
@@ -160,7 +160,7 @@ class AnswersFormContainer extends Component {
             <div>
               {message}
             </div>
-            <textarea rows='25' cols='70' value={this.state.answer} onChange={this.handleChange} />
+            <textarea style={{fontSize: '25px'}} rows='17' cols='70' value={this.state.answer} onChange={this.handleChange} />
             <div className="text-center">
               <a href="#" data-reveal-id="answersFormModal">Modal View</a>
             </div>

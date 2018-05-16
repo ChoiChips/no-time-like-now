@@ -141,7 +141,7 @@ class RedditFormContainer extends Component {
     let submitButton;
 
     if (this.state.answer.trim().length >= 100) {
-      submitButton = <input type="submit" value="Submit" />
+      submitButton = <input type="submit" value="Submit" className="button"/>
     }
 
     return(
@@ -153,7 +153,7 @@ class RedditFormContainer extends Component {
               <a target="_blank" className="name" href={`https://www.reddit.com/u/${this.state.prompt.handle}`}>{this.state.prompt.handle}</a> on {this.state.prompt.date_made}
             </div>
             {message}
-            <textarea rows='25' cols='70' value={this.state.answer} onChange={this.handleChange} />
+            <textarea style={{fontSize: '25px'}} rows='17' cols='70' value={this.state.answer} onChange={this.handleChange} />
             {submitButton}
           </form>
         </div>
@@ -167,7 +167,7 @@ class RedditFormContainer extends Component {
             <div>
               {message}
             </div>
-            <textarea rows='25' cols='70' value={this.state.answer} onChange={this.handleChange} />
+            <textarea style={{fontSize: '25px'}} rows='17' cols='70' value={this.state.answer} onChange={this.handleChange} />
             <div className="text-center">
               <a href="#" data-reveal-id="redditFormModal">Modal View</a>
             </div>

@@ -97,7 +97,7 @@ class RandomFormContainer extends Component {
     let submitButton;
 
     if (this.state.answer.trim().length >= 100) {
-      submitButton = <input type="submit" value="Submit" />
+      submitButton = <input type="submit" value="Submit" className="button"/>
     }
 
     let recentAnswer, forcedPrompt
@@ -121,7 +121,7 @@ class RandomFormContainer extends Component {
             <Link className="name">{this.state.prompt.handle}</Link> on {this.state.prompt.date_made}
           </div>
           {message}
-          <textarea rows='25' cols='70' value={this.state.answer} onChange={this.handleChange} />
+          <textarea style={{fontSize: '25px'}} rows='17' cols='70' value={this.state.answer} onChange={this.handleChange} />
           {submitButton}
         </form>
       </div>

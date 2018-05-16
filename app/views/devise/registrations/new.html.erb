@@ -1,8 +1,19 @@
 
 <div class="row">
-  <div class="columns medium-8 medium-centered">
+  <div class="columns medium-8 medium-left sign-up-description">
+    <h2 class="name">What is No Time Like Now?</h2>
+    <p class="text-left">
+      No Time Like Now is a website for creators who struggle with writer's block. It collects writing prompts from across the web
+      as well as sourcing them from the community to provide a stream of steady creative inspiration. After signing up, users must
+      respond to a mandatory prompt in order to gain access to site. This daily prompt will reset for 24 hours after a user's latest
+      submission. The idea behind this to push users to be creative at least once per day and hopefully break through any blockers that
+      they might be facing.
+    </p>
+  </div>
 
-    <h2 class="text-center">Sign up</h2>
+  <div class="columns medium-4 small-center medium-right sign-up">
+
+    <h2 class="text-center name">Sign up</h2>
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
       <%= devise_error_messages! %>
 
@@ -13,7 +24,7 @@
 
       <div class="field">
         <%= f.label :email, class: "label" %><br />
-        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "off" %>
       </div>
 
       <div class="field">
@@ -30,7 +41,7 @@
       </div>
 
       <div class="actions">
-        <%= f.submit "Sign up" %>
+        <%= f.submit "Sign up", :class => "button" %>
       </div>
     <% end %>
 

@@ -62,8 +62,6 @@ class NavBar extends Component {
 
     return (
       <div>
-        <nav className="navbar navbar-default">
-        </nav>
         <div className="content">
           {React.cloneElement(this.props.children, {recentAnswer: this.state.recentAnswer})}
         </div>
