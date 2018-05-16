@@ -9,11 +9,7 @@ class NavBar extends Component {
       recentAnswer: false
     }
   }
-
-  // needs to have something every time cuz compDidMount only happens when mounting
-  // in comp will rece props will have browserHistory push
-  // pass down handle change to post page to change state of nav bar boolean when successful post occurs.
-
+  
   componentDidMount() {
     fetch('/api/v1/users.json', {
       credentials: 'same-origin'
@@ -66,28 +62,10 @@ class NavBar extends Component {
   }
 
   render() {
-    // let redirect_check
-    // if (this.state.recentAnswer === false) {
-    //   redirect_check = <Redirect to="/prompts/random" />
-    // }
 
     return (
       <div>
         <nav className="navbar navbar-default">
-          <div className="navbar-header">
-            <Link className="navbar-brand" to={`/users/${this.state.currentUser.id}`}>
-              <button>Profile</button>
-            </Link>
-            <Link className="navbar-brand" to="/">
-              <button>Prompts</button>
-            </Link>
-            <Link to="/prompts/new">
-              <button className="btn btn-info log">New Prompt</button>
-            </Link>
-            <Link to="/reddit">
-              <button className="btn btn-danger log">/r/WritingPrompts</button>
-            </Link>
-          </div>
         </nav>
         <div className="content">
           {React.cloneElement(this.props.children, {recentAnswer: this.state.recentAnswer})}

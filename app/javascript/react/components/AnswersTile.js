@@ -17,9 +17,9 @@ const AnswersTile = (props) => {
       </div>
       <Link className="prompts-tile" to={`/answers/${props.id}`}>
         <div className="content">
-          <h3 className="answer">
+          <h4 className="answer">
             {answer}
-          </h3>
+          </h4>
         </div>
       </Link>
     </div>

@@ -53,6 +53,7 @@ class PromptsShowContainer extends Component {
 
     return(
       <div className="row">
+        <h1 className="name text-center">Prompt</h1>
         <div className="columns medium-11 medium-centered">
           <PromptsShow
             key={this.state.prompt.id}

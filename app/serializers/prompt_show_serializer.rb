@@ -1,6 +1,7 @@
 class PromptShowSerializer < ActiveModel::Serializer
   attributes :id, :description, :handle, :date_made, :user_answers
   has_many :answers
+  belongs_to :user
 
   def handle
     user = User.find(object.user_id)

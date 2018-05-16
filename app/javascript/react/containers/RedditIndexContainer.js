@@ -17,7 +17,7 @@ class RedditIndexContainer extends Component {
   // }
 
   componentDidMount(){
-    fetch('https://www.reddit.com/r/writingprompts/hot.json')
+    fetch('https://www.reddit.com/r/writingprompts/hot.json?limit=24')
     .then(response => {
       if (response.ok) {;
         return response;
