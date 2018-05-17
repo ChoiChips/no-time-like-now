@@ -1,15 +1,5 @@
 @import '_partials/variables';
 
-.name {
-  font-family: $font-primary;
-  text-align: left;
-  color: $color-tertiary;
-}
-
-.user-sig{
-  font-style: italic;
-}
-
 .name-show{
   text-align: center;
   font-style: italic;
@@ -24,19 +14,14 @@
   font-family: helvetica, 'sans serif';
   color: $black;
   .name {
-    font-family: $font-primary;
+    font-family: $font-one;
     text-align: center;
     color: $color-tertiary;
   }
   .content {
     padding: 15px;
   }
-  // .photo {
-  //   height: 180px;
-  //   background-size: cover;
-  //   background-repeat: no-repeat;
-  //   box-shadow: 0 0 90px rgba(0,0,0,0.3) inset;
-  // }
+  
   &:hover {
     background: rgba($color-primary,.5);
   }

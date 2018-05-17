@@ -54,21 +54,19 @@ class RedditIndexContainer extends Component {
     })
 
     return (
-      <div>
-        <div className="row prompt-container">
-          <h1 className="name text-center">Reddit's /r/WritingPrompts</h1>
-          <ul className="text-left">
-            <li>WP - Writing Prompt: No restrictions</li>
-            <li>EU - Established Universe: Based on existing fiction </li>
-            <li>CW - Constrained Writing: Limitations or forced usage of words, letters, etc.</li>
-            <li>TT - Theme Thursday: Weekly prompts, announced Thursdays.</li>
-            <li>MP - Media Prompt: Audio or video</li>
-            <li>IP - Image Prompt: A striking image or album of images</li>
-            <li>RF - Reality Fiction: Has happened before or should be able to happen in the real world to unknown people.</li>
-          </ul>
+      <div className="row prompt-container">
+        <h1 className="name text-center">Reddit's /r/WritingPrompts</h1>
+        <ul id="reddit-rules">
+          <li>WP - Writing Prompt: No restrictions</li>
+          <li>EU - Established Universe: Based on existing fiction </li>
+          <li>CW - Constrained Writing: Limitations or forced usage of words, letters, etc.</li>
+          <li>TT - Theme Thursday: Weekly prompts, announced Thursdays.</li>
+          <li>MP - Media Prompt: Audio or video</li>
+          <li>IP - Image Prompt: A striking image or album of images</li>
+          <li>RF - Reality Fiction: Has happened before or should be able to happen in the real world to unknown people.</li>
+        </ul>
 
-          {displayedPrompts}
-        </div>
+        {displayedPrompts}
       </div>
     );
   }

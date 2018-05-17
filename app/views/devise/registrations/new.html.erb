@@ -1,48 +1,55 @@
-
-<div class="row">
-  <div class="columns medium-8 medium-left sign-up-description">
-    <h2 class="name">What is No Time Like Now?</h2>
-    <p class="text-left">
-      No Time Like Now is a website for creators who struggle with writer's block. It collects writing prompts from across the web
-      as well as sourcing them from the community to provide a stream of steady creative inspiration. After signing up, users must
-      respond to a mandatory daily prompt, which then grants site access 24 hours after a user's latestsubmission. The idea behind
-      this is to push users to be creative at least once per day and hopefully break through any blockers that they might be facing.
-    </p>
+<div>
+  <div id="signup-img">
+    <div class="photo-cred">
+      Photo by rawpixel on Unsplash
+    </div>
   </div>
 
-  <div class="columns medium-4 small-center medium-right sign-up">
+  <div class="row signup-info">
+    <div class="columns small-12 medium-6 signup-description">
+      <h2 class="name signup-title text-center">What is No Time Like Now?</h2>
+      <p class="text-left">
+        No Time Like Now is a website for creators who struggle with writer's block. It collects writing prompts from across the web
+        as well as sourcing them from the community to provide a stream of steady creative inspiration. After signing up, users must
+        respond to a mandatory daily prompt, which then grants site access 24 hours after a user's latest submission. The idea behind
+        this is to push users to be creative at least once per day and hopefully break through any blockers that they might be facing.
+      </p>
+    </div>
 
-    <h2 class="text-center name">Sign up</h2>
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-      <%= devise_error_messages! %>
+    <div class="columns medium-6 small-center signup-box">
 
-      <div class="field">
-        <%= f.label :handle, class: "label" %><br />
-        <%= f.text_field :handle %>
-      </div>
+      <h2 class="text-center name">Sign up</h2>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= devise_error_messages! %>
 
-      <div class="field">
-        <%= f.label :email, class: "label" %><br />
-        <%= f.email_field :email, autofocus: true, autocomplete: "off" %>
-      </div>
+        <div class="field">
+          <%= f.label :handle, class: "label" %><br />
+          <%= f.text_field :handle %>
+        </div>
 
-      <div class="field">
-        <%= f.label :password, class: "label" %>
-        <% if @minimum_password_length %>
-        <em>(<%= @minimum_password_length %> characters minimum)</em>
-        <% end %><br />
-        <%= f.password_field :password, autocomplete: "off" %>
-      </div>
+        <div class="field">
+          <%= f.label :email, class: "label" %><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "off" %>
+        </div>
 
-      <div class="field">
-        <%= f.label :password_confirmation, class: "label" %><br />
-        <%= f.password_field :password_confirmation, autocomplete: "off" %>
-      </div>
+        <div class="field">
+          <%= f.label :password, class: "label" %>
+          <% if @minimum_password_length %>
+          <em>(<%= @minimum_password_length %> characters minimum)</em>
+          <% end %><br />
+          <%= f.password_field :password, autocomplete: "off" %>
+        </div>
 
-      <div class="actions">
-        <%= f.submit "Sign up", :class => "button" %>
-      </div>
-    <% end %>
+        <div class="field">
+          <%= f.label :password_confirmation, class: "label" %><br />
+          <%= f.password_field :password_confirmation, autocomplete: "off" %>
+        </div>
 
+        <div class="actions">
+          <%= f.submit "Sign up", :class => "button" %>
+        </div>
+      <% end %>
+
+    </div>
   </div>
 </div>
