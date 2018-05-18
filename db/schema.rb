@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_18_131602) do
+ActiveRecord::Schema.define(version: 2018_05_18_213504) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,13 +71,19 @@ ActiveRecord::Schema.define(version: 2018_05_18_131602) do
 
   create_table "word_answers", force: :cascade do |t|
     t.string "answer", null: false
-    t.string "word_one", null: false
-    t.string "word_two", null: false
-    t.string "word_three", null: false
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_word_answers_on_user_id"
+  end
+
+  create_table "word_combos", force: :cascade do |t|
+    t.bigint "word_id"
+    t.bigint "word_answer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["word_answer_id"], name: "index_word_combos_on_word_answer_id"
+    t.index ["word_id"], name: "index_word_combos_on_word_id"
   end
 
   create_table "words", force: :cascade do |t|

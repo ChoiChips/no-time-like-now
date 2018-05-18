@@ -1,4 +1,4 @@
-class Api::V1::AnswersController < ApiController
+class Api::V1::WordAnswersController < ApiController
   # before_action :authenticate_user!
 
   def show
@@ -6,14 +6,14 @@ class Api::V1::AnswersController < ApiController
   end
 
   def create
-    # not sure if this will work
-    new_answer = WordAnswer.new(answer_params)
+    new_answer = WordAnswer.new(answer: params[:answer])
     new_answer.user = current_user
-    # new_answer.prompt = Prompt.find(params[:prompt_id])
 
     if user_signed_in?
       if new_answer.save
-        # render json: ["Answer successfully recorded"]
+        WordCombo.create!(word_answer: new_answer, word_id: params[:first])
+        WordCombo.create!(word_answer: new_answer, word_id: params[:second])
+        WordCombo.create!(word_answer: new_answer, word_id: params[:third])
         render json: new_answer
       else
         render json: new_answer.errors.full_messages
@@ -26,6 +26,6 @@ class Api::V1::AnswersController < ApiController
   private
 
   def answer_params
-    params.require(:answer).permit(:answer, :word_one, :word_two, :word_three)
+    params.permit(:answer, :first, :second, :third)
   end
 end
