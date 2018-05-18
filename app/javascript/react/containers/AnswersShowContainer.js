@@ -46,7 +46,7 @@ class AnswersShowContainer extends Component {
           <Link className="name" to={`/users/${this.state.prompt.id}`}>{this.state.prompt.handle}</Link> on {this.state.prompt.date_made}
         </div>
         <div className="columns small-12">
-          <h4 className="page-header text-center">
+          <h4 className="page-header text-left">
             {this.state.answer.answer}
           </h4>
           <div className="name-show">
