@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       get '/prompts/random', to: 'prompts#random'
+      get '/words/random', to: 'words#random'
 
       resources :users, only: [:index, :show] do
         resources :prompts, only: [:index]
@@ -20,6 +21,9 @@ Rails.application.routes.draw do
       resources :reddits do
         resources :reddit_answers
       end
+
+      resources :words
+      resources :word_answers
     end
   end
 

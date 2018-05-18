@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_13_202352) do
+ActiveRecord::Schema.define(version: 2018_05_18_131602) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,6 +67,24 @@ ActiveRecord::Schema.define(version: 2018_05_13_202352) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["handle"], name: "index_users_on_handle", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "word_answers", force: :cascade do |t|
+    t.string "answer", null: false
+    t.string "word_one", null: false
+    t.string "word_two", null: false
+    t.string "word_three", null: false
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_word_answers_on_user_id"
+  end
+
+  create_table "words", force: :cascade do |t|
+    t.string "word", null: false
+    t.string "definition", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
