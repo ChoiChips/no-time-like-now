@@ -1,0 +1,44 @@
+#signup-img {
+  background-image: image-url("minimal1.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: 50% 50%;
+  width: 100%;
+  height: 500px;
+  div {
+    text-align: left;
+  }
+}
+
+.signup-info {
+  max-width: 85%;
+}
+
+.signup-box {
+  margin-top: 30px;
+}
+
+.signup-description {
+  margin-top: 30px;
+  p {
+    font-size: 1.3rem;
+  }
+}
+
+#signup-title {
+  margin-bottom: 30px;
+}
+
+#signin-img {
+  background-image: image-url("minimal2.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: 50% 50%;
+  width: 100%;
+  height: 700px;
+  div {
+    color: white;
+  }
+}

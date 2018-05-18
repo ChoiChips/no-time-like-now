@@ -37,19 +37,20 @@ class AnswersShowContainer extends Component {
     return(
       <div className="row collapse">
         <div className="columns small-12">
-          <h2 className="page-header text-center">
+          <h1 className="name text-center">Prompt</h1>
+          <h3 className="page-header text-center">
             {this.state.prompt.description}
-          </h2>
+          </h3>
         </div>
         <div className="name-show">
           <Link className="name" to={`/users/${this.state.prompt.id}`}>{this.state.prompt.handle}</Link> on {this.state.prompt.date_made}
         </div>
         <div className="columns small-12">
-          <h2 className="page-header text-center">
+          <h4 className="page-header text-left">
             {this.state.answer.answer}
-          </h2>
+          </h4>
           <div className="name-show">
-            on {this.state.answer.date_made} by <Link className="name" to={`/users/${this.state.answer.user_id}`}>{this.state.answer.handle}</Link>
+            <Link className="name" to={`/users/${this.state.answer.user_id}`}>{this.state.answer.handle}</Link> on {this.state.answer.date_made}
           </div>
         </div>
       </div>

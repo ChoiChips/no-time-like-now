@@ -33,6 +33,11 @@ class AnswersFormContainer extends Component {
         this.setState ({
           prompt: prompt.prompt
         })
+        $(document).ready(function() {
+          setTimeout(function(){
+            $("#answersFormModal").foundation('reveal', 'open');
+          }, 0);
+        });
       })
       .catch(error => console.error(`Error in fetch: ${error.message}`))
 
@@ -118,21 +123,50 @@ class AnswersFormContainer extends Component {
     let submitButton;
 
     if (this.state.answer.trim().length >= 100) {
-      submitButton = <input type="submit" value="Submit" />
+      submitButton = <input type="submit" value="Submit" className="button"/>
+    }
+
+    let user_id;
+    if (this.state.prompt.user) {
+      user_id = this.state.prompt.user.id
     }
 
     return(
       <div className="row">
+        <div id="answersFormModal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog" className="reveal-modal text-center">
+          <h1 className="name text-center">Prompt</h1>
+          <div className="columns medium-12 large-12 medium-centered">
+            <form onSubmit={this.handleSubmit}>
+              <h3 className="text-center">{this.state.prompt.description}</h3>
+              <div className="name-show">
+                <Link className="name">{this.state.prompt.handle}</Link> on {this.state.prompt.date_made}
+              </div>
+              <div>
+                {message}
+              </div>
+              <textarea style={{fontSize: '25px'}} rows='17' cols='70' value={this.state.answer} onChange={this.handleChange} />
+              {submitButton}
+            </form>
+          </div>
+        </div>
+        <h1 className="name text-center">Prompt</h1>
+
         <div className="columns medium-12 large-12 medium-centered">
           <form onSubmit={this.handleSubmit}>
-            <label>
-              <h1>{this.state.prompt.description}</h1>
-              {message}
-              <textarea rows='25' cols='70' style={{border:"none"}} value={this.state.answer} onChange={this.handleChange} />
-            </label>
-            <div>
+            <h3 className="text-center">{this.state.prompt.description}</h3>
+            <div className="name-show">
+              <Link className="name" to={`/users/${user_id}`}>{this.state.prompt.handle}</Link> on {this.state.prompt.date_made}
             </div>
-            {submitButton}
+            <div>
+              {message}
+            </div>
+            <textarea style={{fontSize: '25px'}} rows='17' cols='70' value={this.state.answer} onChange={this.handleChange} />
+            <div className="text-center">
+              <a href="#" data-reveal-id="answersFormModal">Modal View</a>
+            </div>
+            <div className="text-center">
+              {submitButton}
+            </div>
           </form>
         </div>
       </div>

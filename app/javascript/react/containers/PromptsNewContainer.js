@@ -68,12 +68,12 @@ class PromptsNewContainer extends Component {
 
     return(
       <div className="row">
+        <h1 className="name text-center">Add New Prompt</h1>
         <div className="columns medium-12 large-12 medium-centered">
           <form onSubmit={this.handleSubmit}>
             <label>
-              <h1>Add a new prompt here.</h1>
               {message}
-              <textarea rows='25' cols='70' style={{border:"none"}} value={this.state.description} onChange={this.handleChange} />
+              <textarea rows='25' cols='70' value={this.state.description} onChange={this.handleChange} />
             </label>
             <div>
             </div>

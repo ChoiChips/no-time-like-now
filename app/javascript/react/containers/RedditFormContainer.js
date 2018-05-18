@@ -46,11 +46,15 @@ class RedditFormContainer extends Component {
         } else {
           this.setState({ prompt: body[0] });
         }
+        $(document).ready(function() {
+          setTimeout(function(){
+            $("#redditFormModal").foundation('reveal', 'open');
+          }, 0);
+        });
       })
       .catch(error => console.error(`Error in fetch (submitting new Reddit prompt): ${error.message}`))
 
     } else if (this.props.params.id) {
-      debugger;
       fetch(`/api/v1/reddits/${this.props.params.id}`, {
         credentials: 'same-origin'
       })
@@ -58,7 +62,7 @@ class RedditFormContainer extends Component {
         if (response.ok) {
           return response;
         } else {
-          window.location='/'
+          // window.location='/'
 
           let errorMessage = `${response.status} (${response.statusText})`,
           error = new Error(errorMessage);
@@ -70,6 +74,11 @@ class RedditFormContainer extends Component {
         this.setState ({
           prompt: prompt.reddit
         })
+        $(document).ready(function() {
+          setTimeout(function(){
+            $("#redditFormModal").foundation('reveal', 'open');
+          }, 0);
+        });
       })
       .catch(error => console.error(`Error in fetch: ${error.message}`))
     }
@@ -132,21 +141,47 @@ class RedditFormContainer extends Component {
     let submitButton;
 
     if (this.state.answer.trim().length >= 100) {
-      submitButton = <input type="submit" value="Submit" />
+      submitButton = <input type="submit" value="Submit" className="button"/>
     }
 
     return(
       <div className="row">
+        <div id="redditFormModal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog" className="reveal-modal text-center">
+          <h1 className="name text-center">Prompt</h1>
+          <div className="columns medium-12 large-12 medium-centered">
+            <form onSubmit={this.handleSubmit}>
+              <a target="_blank" href={this.state.prompt.url}>
+                <h3>{this.state.prompt.description}</h3>
+              </a>
+              <div className="user-sig text-center">
+                <a target="_blank" className="name" href={`https://www.reddit.com/u/${this.state.prompt.handle}`}>{this.state.prompt.handle}</a> on {this.state.prompt.date_made}
+              </div>
+              {message}
+              <textarea style={{fontSize: '25px'}} rows='17' cols='70' value={this.state.answer} onChange={this.handleChange} />
+              {submitButton}
+            </form>
+          </div>
+        </div>
+        <h1 className="name text-center">Prompt</h1>
+
         <div className="columns medium-12 large-12 medium-centered">
           <form onSubmit={this.handleSubmit}>
-            <label>
-              <a target="_blank" href={this.state.prompt.url}><h1>{this.state.prompt.description}</h1></a>
-              {message}
-              <textarea rows='25' cols='70' style={{border:"none"}} value={this.state.answer} onChange={this.handleChange} />
-            </label>
-            <div>
+            <a target="_blank" href={this.state.prompt.url}>
+              <h3>{this.state.prompt.description}</h3>
+            </a>
+            <div className="user-sig text-center">
+              <a target="_blank" className="name" href={`https://www.reddit.com/u/${this.state.prompt.handle}`}>{this.state.prompt.handle}</a> on {this.state.prompt.date_made}
             </div>
-            {submitButton}
+            <div>
+              {message}
+            </div>
+            <textarea style={{fontSize: '25px'}} rows='17' cols='70' value={this.state.answer} onChange={this.handleChange} />
+            <div className="text-center">
+              <a href="#" data-reveal-id="redditFormModal">Modal View</a>
+            </div>
+            <div className="text-center">
+              {submitButton}
+            </div>
           </form>
         </div>
       </div>

@@ -32,7 +32,7 @@ class RandomFormContainer extends Component {
       })
       $(document).ready(function() {
         setTimeout(function(){
-          $("#myModal").foundation('reveal', 'open');
+          $("#randomFormModal").foundation('reveal', 'open');
         }, 0);
       });
     })
@@ -97,7 +97,7 @@ class RandomFormContainer extends Component {
     let submitButton;
 
     if (this.state.answer.trim().length >= 100) {
-      submitButton = <input type="submit" value="Submit" />
+      submitButton = <input type="submit" value="Submit" className="button"/>
     }
 
     let recentAnswer, forcedPrompt
@@ -106,17 +106,22 @@ class RandomFormContainer extends Component {
       forcedPrompt = "close_on_background_click:false;close_on_esc:false;"
     }
 
+    let user_id;
+    if (this.state.prompt.user) {
+      user_id = this.state.prompt.user.id
+    }
+
     return(
-      <div id="myModal" data-options={forcedPrompt} data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog" className="reveal-modal text-center">
+      <div id="randomFormModal" data-options={forcedPrompt} data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog" className="reveal-modal text-center">
         <h3 className="text-center">{recentAnswer}</h3>
+        <h1 className="name text-center">Prompt</h1>
         <form onSubmit={this.handleSubmit}>
-          <label>
-            <h1>{this.state.prompt.description}</h1>
-            {message}
-            <textarea rows='25' cols='70' style={ {border: "none"} } value={this.state.answer} onChange={this.handleChange} />
-          </label>
-          <div>
+          <h3>{this.state.prompt.description}</h3>
+          <div className="name-show">
+            <Link className="name">{this.state.prompt.handle}</Link> on {this.state.prompt.date_made}
           </div>
+          {message}
+          <textarea style={{fontSize: '25px'}} rows='17' cols='70' value={this.state.answer} onChange={this.handleChange} />
           {submitButton}
         </form>
       </div>

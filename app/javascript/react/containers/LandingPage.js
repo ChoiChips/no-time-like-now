@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
 import { Link, browserHistory, Redirect } from 'react-router'
 
-class NavBar extends Component {
+class LandingPage extends Component {
   constructor(props){
     super(props)
-    this.state = {
-      currentUser: {},
-      recentAnswer: false
-    }
+    this.state = {}
   }
 
   componentDidMount() {
@@ -61,7 +58,9 @@ class NavBar extends Component {
   render() {
 
     return (
-      <div className="navbar">
+      <div>
+        <nav className="navbar navbar-default">
+        </nav>
         <div className="content">
           {React.cloneElement(this.props.children, {recentAnswer: this.state.recentAnswer})}
         </div>
@@ -70,4 +69,4 @@ class NavBar extends Component {
   }
 }
 
-export default NavBar;
+export default LandingPage;

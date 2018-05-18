@@ -6,6 +6,7 @@ const RedditShow = (props) => {
   return(
     <div className="row collapse">
       <div className="columns small-12">
+        <h1 className="name text-center">Prompt</h1>
         <h2 className="page-header text-center">
           {props.description}
         </h2>

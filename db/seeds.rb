@@ -27,12 +27,9 @@ prompt_8 = Prompt.create!(description: "The Fellowship of the Ring has been form
 prompt_9 = Prompt.create!(description: "Science created a machine that can observe the past, they discover ancient civilizations were far more advanced than we imagined and could see the future before being wiped out. They watched only one thing, your life.", user: user_3)
 
 # Test answers
-answer_1 = Answer.create!(answer: "A website to track all the unicorns and mythical creatures that I have slain.", user: user_1, prompt: prompt_1)
-answer_2 = Answer.create!(answer: "This is test answer 2 for the test prompt 2. It must be a minimum of 50 characters long.", user: user_1, prompt: prompt_2)
-answer_3 = Answer.create!(answer: "This is test answer 3 for the test prompt 3. It must be a minimum of 50 characters long.", user: user_1, prompt: prompt_3)
+answer_1 = Answer.create!(answer: "A website to track all my favorite movie speeches. My favorite speech is by Aragorn the Lord Of The Rings: Sons of Gondor! Of Rohan! My brothers! I see in your eyes the same fear that would take the heart of me! A day may come when the courage of men fails, when we forsake our friends and break all bonds of fellowship. But it is not this day. An hour of wolves and shattered shields when the age of Men comes crashing down! But it is not this day! This day we fight! By all that you hold dear on this good Earth, I bid you stand! Men of the West!", user: user_1, prompt: prompt_1)
+answer_2 = Answer.create!(answer: "I would use something with Ruby and Javascript and Python. Probably something with Unicorns as well.", user: user_1, prompt: prompt_2)
+answer_3 = Answer.create!(answer: "I would definitely start by utilizing Google and Stack overflow. From there, I would probably try searching for other resources.", user: user_1, prompt: prompt_3)
 answer_4 = Answer.create!(answer: "I think I would make a website for me to compile all my writing in one place. Somewhere that I can be exposed to a hub of prompts to respond to and get the creative juices flowing! ", user: user_2, prompt: prompt_1)
-answer_5 = Answer.create!(answer: "This is test answer 5 for the test prompt 2. It must be a minimum of 50 characters long.", user: user_2, prompt: prompt_2)
-answer_6 = Answer.create!(answer: "This is test answer 6 for the test prompt 3. It must be a minimum of 50 characters long.", user: user_2, prompt: prompt_3)
+answer_5 = Answer.create!(answer: "Probably follow something similar to what other job sites do. See if there is an API that collects said jobs for me.", user: user_2, prompt: prompt_2)
 answer_7 = Answer.create!(answer: "I would make a Breakable Toy that makes other Breakable Toys and name it \"The Unbreakable Toy\"", user: user_3, prompt: prompt_1)
-answer_8 = Answer.create!(answer: "This is test answer 8 for the test prompt 2. It must be a minimum of 50 characters long.", user: user_3, prompt: prompt_2)
-answer_9 = Answer.create!(answer: "This is test answer 9 for the test prompt 3. It must be a minimum of 50 characters long.", user: user_3, prompt: prompt_3)
