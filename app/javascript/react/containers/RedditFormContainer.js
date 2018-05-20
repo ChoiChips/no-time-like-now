@@ -160,8 +160,8 @@ class RedditFormContainer extends Component {
             </div>
             <textarea style={{fontSize: '25px'}} rows='17' cols='70' value={this.state.answer} onChange={this.handleChange} />
             <div className="text-center">
-              {submitButton}
-              <a href="#" className="radius button" data-reveal-id="redditFormModal">Modal View</a>
+              <div>{submitButton}</div>
+              <div><a href="#" className="radius button" data-reveal-id="redditFormModal">Modal View</a></div>
             </div>
           </form>
         </div>

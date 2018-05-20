@@ -16,6 +16,8 @@ import RedditFormContainer from '../react/containers/RedditFormContainer'
 
 import RandomFormContainer from '../react/containers/RandomFormContainer'
 
+import UnsplashFormContainer from '../react/containers/UnsplashFormContainer'
+
 import WordsRandomContainer from '../react/containers/WordsRandomContainer'
 import WordAnswerContainer from '../react/containers/WordAnswerContainer'
 
@@ -48,6 +50,7 @@ const Index = props => {
         <Route path='words/random' component={WordsRandomContainer} />
         <Route path='word_answers/:id' component={WordAnswerContainer} />
 
+        <Route path='unsplash/random' component={UnsplashFormContainer} />
       </Route>
     </Router>
   );
