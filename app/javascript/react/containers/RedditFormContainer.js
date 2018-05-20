@@ -14,6 +14,8 @@ class RedditFormContainer extends Component {
 
   componentDidMount() {
 
+    // consider using window.location.href for current url
+
     if (this.props.location.state !== undefined) {
       let submission = {
         prompt: {
@@ -126,42 +128,23 @@ class RedditFormContainer extends Component {
 
   render() {
     let characterCount = this.state.answer.trim().length
-    let message;
-
-    if (characterCount < 100) {
-      message = `You need ${100 - characterCount} more characters to submit. Remember, there is no backspace!`
-    } else if (characterCount >= 100 && characterCount < 500) {
-      message = `You have met expectations! Character count = ${characterCount}`
-    } else if (characterCount >= 500 && characterCount < 1000) {
-      message = `You have exceeded expectations! Character count = ${characterCount}`
-    } else if (characterCount >= 1000) {
-      message = `You're really going at it, arent you... Character count = ${characerCount}`
-    }
-
+    let wordCount = this.state.answer.split(/\s+/).length - 1
+    let message = "Submission Requirements: "
     let submitButton;
 
-    if (this.state.answer.trim().length >= 100) {
-      submitButton = <input type="submit" value="Submit" className="button"/>
+    if (characterCount < 100) {
+      message += `${characterCount}/100 characters `
+    }
+    if (wordCount < 20) {
+      message += `${wordCount}/20 words`
+    }
+    if (characterCount >= 100 && wordCount >= 20) {
+      message = `You can now submit! Character count = ${characterCount}. Word count = ${wordCount}`
+      submitButton = <input type="submit" value="Submit" className="radius button text-left"/>
     }
 
     return(
       <div className="row">
-        <div id="redditFormModal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog" className="reveal-modal text-center">
-          <h1 className="name text-center">Prompt</h1>
-          <div className="columns medium-12 large-12 medium-centered">
-            <form onSubmit={this.handleSubmit}>
-              <a target="_blank" href={this.state.prompt.url}>
-                <h3>{this.state.prompt.description}</h3>
-              </a>
-              <div className="user-sig text-center">
-                <a target="_blank" className="name" href={`https://www.reddit.com/u/${this.state.prompt.handle}`}>{this.state.prompt.handle}</a> on {this.state.prompt.date_made}
-              </div>
-              {message}
-              <textarea style={{fontSize: '25px'}} rows='17' cols='70' value={this.state.answer} onChange={this.handleChange} />
-              {submitButton}
-            </form>
-          </div>
-        </div>
         <h1 className="name text-center">Prompt</h1>
 
         <div className="columns medium-12 large-12 medium-centered">
@@ -177,12 +160,27 @@ class RedditFormContainer extends Component {
             </div>
             <textarea style={{fontSize: '25px'}} rows='17' cols='70' value={this.state.answer} onChange={this.handleChange} />
             <div className="text-center">
-              <a href="#" data-reveal-id="redditFormModal">Modal View</a>
-            </div>
-            <div className="text-center">
               {submitButton}
+              <a href="#" className="radius button" data-reveal-id="redditFormModal">Modal View</a>
             </div>
           </form>
+        </div>
+
+        <div id="redditFormModal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog" className="reveal-modal text-center">
+          <h1 className="name text-center">Prompt</h1>
+          <div className="columns medium-12 large-12 medium-centered">
+            <form onSubmit={this.handleSubmit}>
+              <a target="_blank" href={this.state.prompt.url}>
+                <h3>{this.state.prompt.description}</h3>
+              </a>
+              <div className="user-sig text-center">
+                <a target="_blank" className="name" href={`https://www.reddit.com/u/${this.state.prompt.handle}`}>{this.state.prompt.handle}</a> on {this.state.prompt.date_made}
+              </div>
+              {message}
+              <textarea style={{fontSize: '25px'}} rows='17' cols='70' value={this.state.answer} onChange={this.handleChange} />
+              {submitButton}
+            </form>
+          </div>
         </div>
       </div>
     )

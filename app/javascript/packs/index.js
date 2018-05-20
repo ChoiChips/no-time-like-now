@@ -1,8 +1,6 @@
 import React from 'react';
 import {Router, browserHistory, Route, IndexRoute } from 'react-router';
 
-import LandingPage from '../react/containers/LandingPage'
-
 import UsersShowContainer from '../react/containers/UsersShowContainer'
 
 import PromptsIndexContainer from '../react/containers/PromptsIndexContainer'
@@ -18,6 +16,9 @@ import RedditFormContainer from '../react/containers/RedditFormContainer'
 
 import RandomFormContainer from '../react/containers/RandomFormContainer'
 
+import WordsRandomContainer from '../react/containers/WordsRandomContainer'
+import WordAnswerContainer from '../react/containers/WordAnswerContainer'
+
 import NavBar from '../react/components/NavBar'
 
 const Index = props => {
@@ -26,6 +27,7 @@ const Index = props => {
       <Route path='/' component={NavBar}>
         <IndexRoute component={PromptsIndexContainer} />
 
+        <Route path='answers/:id' component={AnswersShowContainer} />
         <Route path='prompts' component={PromptsIndexContainer} />
         <Route path='prompts/new' component={PromptsNewContainer} />
 
@@ -37,12 +39,15 @@ const Index = props => {
         <Route path='users/:id' component={UsersShowContainer} />
 
         <Route path='users/:id/prompt' component={PromptsShowContainer} />
-        <Route path='answers/:id' component={AnswersShowContainer} />
 
         <Route path='reddit' component={RedditIndexContainer} />
         <Route path='reddit/new' component={RedditFormContainer} />
         <Route path='reddit/:id/new' component={RedditFormContainer} />
         <Route path='reddit/:id' component={RedditShowContainer} />
+
+        <Route path='words/random' component={WordsRandomContainer} />
+        <Route path='word_answers/:id' component={WordAnswerContainer} />
+
       </Route>
     </Router>
   );

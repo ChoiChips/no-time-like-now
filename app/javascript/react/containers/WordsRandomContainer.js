@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 
-class RandomFormContainer extends Component {
+class WordsRandomContainer extends Component {
   constructor(props){
     super(props)
     this.state = {
-      prompt: '',
+      words: [],
       answer:  ''
     }
   this.handleChange = this.handleChange.bind(this)
@@ -13,7 +13,7 @@ class RandomFormContainer extends Component {
   }
 
   componentDidMount() {
-    fetch(`/api/v1/prompts/random`, {
+    fetch(`/api/v1/words/random`, {
       credentials: 'same-origin'
     })
     .then(response => {
@@ -26,13 +26,13 @@ class RandomFormContainer extends Component {
         }
       })
     .then(response => response.json())
-    .then(prompt => {
+    .then(words => {
       this.setState ({
-        prompt: prompt.prompt
+        words: words
       })
       $(document).ready(function() {
         setTimeout(function(){
-          $("#randomFormModal").foundation('reveal', 'open');
+          $("#wordFormModal").foundation('reveal', 'open');
         }, 0);
       });
     })
@@ -55,13 +55,13 @@ class RandomFormContainer extends Component {
       return false ;
     } else {
       let submission = {
-        answer: {
-          answer: this.state.answer,
-          prompt_id: this.state.prompt.id
-        }
+        answer: this.state.answer,
+        first: this.state.words[0].id,
+        second: this.state.words[1].id,
+        third: this.state.words[2].id
       }
 
-      fetch(`/api/v1/prompts/${this.state.prompt.id}/answers`, {
+      fetch(`/api/v1/word_answers`, {
         credentials: 'same-origin',
         method: 'POST',
         body: JSON.stringify(submission),
@@ -69,12 +69,16 @@ class RandomFormContainer extends Component {
       })
       .then(response => {
         if (response.ok) {
-          window.location.href = `http://localhost:3000/prompts/${this.state.prompt.id}`
+          return response;
         } else {
           let errorMessage = `${response.status} (${response.statusText})`,
           error = new Error(errorMessage);
           throw(error);
         }
+      })
+      .then(response => response.json())
+      .then(wordAnswerId => {
+        window.location.href = `http://localhost:3000/word_answers/${wordAnswerId}`
       })
       .catch(error => console.error(`Error in fetch (submitting new answer): ${error.message}`))
     }
@@ -97,33 +101,49 @@ class RandomFormContainer extends Component {
       submitButton = <input type="submit" value="Submit" className="radius button text-left"/>
     }
 
-    let recentAnswer, forcedPrompt
-    if (this.props.recentAnswer === false) {
-      recentAnswer = "Please respond to your daily prompt"
-      forcedPrompt = "close_on_background_click:false;close_on_esc:false;"
-    }
+    let forcedPrompt;
 
-    let user_id;
-    if (this.state.prompt.user) {
-      user_id = this.state.prompt.user.id
-    }
+    let words = this.state.words.map( (word) => {
+      return (
+        <h3 key={word.word}><strong>{word.word}:</strong> {word.definition}</h3>
+      )
+    })
 
     return(
-      <div id="randomFormModal" data-options={forcedPrompt} data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog" className="reveal-modal text-center">
-        <h3 className="text-center">{recentAnswer}</h3>
-        <h1 className="name text-center">Prompt</h1>
-        <form onSubmit={this.handleSubmit}>
-          <h3>{this.state.prompt.description}</h3>
-          <div className="name-show">
-            <Link className="name">{this.state.prompt.handle}</Link> on {this.state.prompt.date_made}
-          </div>
-          {message}
-          <textarea style={{fontSize: '25px'}} rows='17' cols='70' value={this.state.answer} onChange={this.handleChange} />
-          {submitButton}
-        </form>
+      <div className="row">
+        <div className="columns medium-12 large-12 text-center">
+          <h1 className="name text-center">Prompt</h1>
+          <h3>Please write a prompt using the following words:</h3>
+          <form onSubmit={this.handleSubmit}>
+            <div className="text-left">
+              {words}
+            </div>
+            {message}
+            <textarea style={{fontSize: '25px'}} rows='17' cols='70' value={this.state.answer} onChange={this.handleChange} />
+            <div className="text-center row">
+              <div>
+                {submitButton}
+                <a href="#" className="radius button text-right" data-reveal-id="wordFormModal">Modal View</a>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div id="wordFormModal" data-options={forcedPrompt} data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog" className="reveal-modal text-center">
+          <h1 className="name text-center">Prompt</h1>
+          <h3>Please write a prompt using the following words:</h3>
+          <form onSubmit={this.handleSubmit}>
+            <div className="text-left">
+              {words}
+            </div>
+            {message}
+            <textarea style={{fontSize: '25px'}} rows='17' cols='70' value={this.state.answer} onChange={this.handleChange} />&nbsp;
+            {submitButton}
+          </form>
+        </div>
       </div>
     )
   }
 }
 
-export default RandomFormContainer
+export default WordsRandomContainer

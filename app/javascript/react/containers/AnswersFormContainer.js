@@ -40,29 +40,6 @@ class AnswersFormContainer extends Component {
         });
       })
       .catch(error => console.error(`Error in fetch: ${error.message}`))
-
-    // // if random prompt request
-    // } else if (this.props.route.path === "prompts/random/new") {
-    //
-    //   fetch('/api/v1/prompts/random', {
-    //     credentials: 'same-origin'
-    //   })
-    //   .then(response => {
-    //     if (response.ok) {
-    //       return response;
-    //     } else {
-    //       let errorMessage = `${response.status} (${response.statusText})`,
-    //       error = new Error(errorMessage);
-    //       throw(error);
-    //     }
-    //   })
-    //   .then(response => response.json())
-    //   .then(prompt => {
-    //     this.setState ({
-    //       prompt: prompt.prompt
-    //     })
-    //   })
-    //   .catch(error => console.error(`Error in fetch: ${error.message}`))
     }
   }
 
@@ -108,22 +85,19 @@ class AnswersFormContainer extends Component {
 
   render() {
     let characterCount = this.state.answer.trim().length
-    let message;
-
-    if (characterCount < 100) {
-      message = `You need ${100 - characterCount} more characters to submit. Remember, there is no backspace!`
-    } else if (characterCount >= 100 && characterCount < 500) {
-      message = `You have met expectations! Character count = ${characterCount}`
-    } else if (characterCount >= 500 && characterCount < 1000) {
-      message = `You have exceeded expectations! Character count = ${characterCount}`
-    } else if (characterCount >= 1000) {
-      message = `You're really going at it, arent you... Character count = ${characerCount}`
-    }
-
+    let wordCount = this.state.answer.split(/\s+/).length - 1
+    let message = "Submission Requirements: "
     let submitButton;
 
-    if (this.state.answer.trim().length >= 100) {
-      submitButton = <input type="submit" value="Submit" className="button"/>
+    if (characterCount < 100) {
+      message += `${characterCount}/100 characters `
+    }
+    if (wordCount < 20) {
+      message += `${wordCount}/20 words`
+    }
+    if (characterCount >= 100 && wordCount >= 20) {
+      message = `You can now submit! Character count = ${characterCount}. Word count = ${wordCount}`
+      submitButton = <input type="submit" value="Submit" className="radius button text-left"/>
     }
 
     let user_id;
@@ -133,6 +107,24 @@ class AnswersFormContainer extends Component {
 
     return(
       <div className="row">
+        <div className="columns medium-12 large-12 medium-centered">
+          <form onSubmit={this.handleSubmit}>
+          <h1 className="name text-center">Prompt</h1>
+            <h3 className="text-center">{this.state.prompt.description}</h3>
+            <div className="name-show">
+              <Link className="name" to={`/users/${user_id}`}>{this.state.prompt.handle}</Link> on {this.state.prompt.date_made}
+            </div>
+            <div>
+              {message}
+            </div>
+            <textarea style={{fontSize: '25px'}} rows='17' cols='70' value={this.state.answer} onChange={this.handleChange} />
+            <div className="text-center">
+              {submitButton}
+              <a href="#" className="radius button" data-reveal-id="answersFormModal">Modal View</a>
+            </div>
+          </form>
+        </div>
+
         <div id="answersFormModal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog" className="reveal-modal text-center">
           <h1 className="name text-center">Prompt</h1>
           <div className="columns medium-12 large-12 medium-centered">
@@ -148,26 +140,6 @@ class AnswersFormContainer extends Component {
               {submitButton}
             </form>
           </div>
-        </div>
-        <h1 className="name text-center">Prompt</h1>
-
-        <div className="columns medium-12 large-12 medium-centered">
-          <form onSubmit={this.handleSubmit}>
-            <h3 className="text-center">{this.state.prompt.description}</h3>
-            <div className="name-show">
-              <Link className="name" to={`/users/${user_id}`}>{this.state.prompt.handle}</Link> on {this.state.prompt.date_made}
-            </div>
-            <div>
-              {message}
-            </div>
-            <textarea style={{fontSize: '25px'}} rows='17' cols='70' value={this.state.answer} onChange={this.handleChange} />
-            <div className="text-center">
-              <a href="#" data-reveal-id="answersFormModal">Modal View</a>
-            </div>
-            <div className="text-center">
-              {submitButton}
-            </div>
-          </form>
         </div>
       </div>
     )
