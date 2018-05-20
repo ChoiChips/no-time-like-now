@@ -42,7 +42,8 @@ class PromptsNewContainer extends Component {
       })
       .then(response => response.json())
       .then(prompt => {
-        window.location.href = `http://localhost:3000/prompts/${prompt.prompt.id}`
+        // window.location.href = `http://localhost:3000/prompts/${prompt.prompt.id}`
+        window.location.href = `https://no-time-like-now.heroku-app.com/prompts/${prompt.prompt.id}`
       })
       .catch(error => console.error(`Error in fetch (submitting new prompt): ${error.message}`))
     }

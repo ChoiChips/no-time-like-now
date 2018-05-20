@@ -65,7 +65,8 @@ class UnsplashFormContainer extends Component {
       })
       .then(response => {
         if (response.ok) {
-          window.location.href = `http://localhost:3000/reddit/${this.state.photo.id}`
+          // window.location.href = `http://localhost:3000/photo/${this.state.photo.id}`
+          window.location.href = `https://no-time-like-now.heroku-app.com/photo/${this.state.photo.id}`
         } else {
           let errorMessage = `${response.status} (${response.statusText})`,
           error = new Error(errorMessage);
