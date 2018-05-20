@@ -52,11 +52,12 @@ class UnsplashFormContainer extends Component {
     } else {;
       let submission = {
         answer: {
-          answer: this.state.answer
+          answer: this.state.answer,
+          url: this.state.photo
         }
       }
 
-      fetch(`/api/v1/reddits/${this.state.photo.id}/reddit_answers`, {
+      fetch(`/api/v1/photo_answers`, {
         credentials: 'same-origin',
         method: 'POST',
         body: JSON.stringify(submission),
@@ -134,8 +135,8 @@ class UnsplashFormContainer extends Component {
               </div>
               <textarea style={textStyle} rows='17' cols='70' value={this.state.answer} onChange={this.handleChange} />
               <div style={{opacity: 0.5}} className="text-center">
-                {submitButton}
-                <a href="#" className="radius button" data-reveal-id="imageFormModal">Modal View</a>
+                <div>{submitButton}</div>
+                <div><a href="#" className="radius button" data-reveal-id="imageFormModal">Modal View</a></div>
               </div>
             </form>
           </div>

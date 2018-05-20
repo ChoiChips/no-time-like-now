@@ -24,6 +24,7 @@ Rails.application.routes.draw do
 
       resources :words
       resources :word_answers
+      resources :photo_answers
     end
   end
 
