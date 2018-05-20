@@ -50,15 +50,20 @@ class PromptsNewContainer extends Component {
   }
 
   render() {
-    let characterCount = this.state.description.trim().length
-    let message;
+    let characterCount = this.state.answer.trim().length
+    let wordCount = this.state.answer.split(/\s+/).length - 1
+    let message = "Submission Requirements: "
+    let submitButton;
 
-    if (characterCount < 10) {
-      message = `Prompt should be between 10 and 250 characters long. ${10 - characterCount} more characters to submit.`
-    } else if (characterCount >= 10 && characterCount <= 250) {
-      message = `You can now submit. Character count = ${characterCount}`
-    } else if (characterCount > 250) {
-      message = `Please shorten your prompt. Character count = ${characterCount}`
+    if (characterCount < 100) {
+      message += `${characterCount}/100 characters `
+    }
+    if (wordCount < 20) {
+      message += `${wordCount}/20 words`
+    }
+    if (characterCount >= 100 && wordCount >= 20) {
+      message = `You can now submit! Character count = ${characterCount}. Word count = ${wordCount}`
+      submitButton = <input type="submit" value="Submit" className="radius button text-left"/>
     }
 
     let submitButton;
