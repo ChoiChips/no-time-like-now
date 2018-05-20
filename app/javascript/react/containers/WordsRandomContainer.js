@@ -79,7 +79,7 @@ class WordsRandomContainer extends Component {
       .then(response => response.json())
       .then(wordAnswerId => {
         // window.location.href = `http://localhost:3000/word_answers/${wordAnswerId}`
-        window.location.href = `https://no-time-like-now.heroku-app.com/word_answers/${wordAnswerId}`
+        window.location.href = `https://no-time-like-now.herokuapp.com/word_answers/${wordAnswerId}`
       })
       .catch(error => console.error(`Error in fetch (submitting new answer): ${error.message}`))
     }

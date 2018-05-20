@@ -116,7 +116,7 @@ class RedditFormContainer extends Component {
       .then(response => {
         if (response.ok) {
           // window.location.href = `http://localhost:3000/reddit/${this.state.prompt.id}`
-          window.location.href = `https://no-time-like-now.heroku-app.com/reddit/${this.state.prompt.id}`
+          window.location.href = `https://no-time-like-now.herokuapp.com/reddit/${this.state.prompt.id}`
         } else {
           let errorMessage = `${response.status} (${response.statusText})`,
           error = new Error(errorMessage);
