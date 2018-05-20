@@ -114,6 +114,7 @@ class WordsRandomContainer extends Component {
         <div className="columns medium-12 large-12 text-center">
           <h1 className="name text-center">Prompt</h1>
           <h3>Please write a prompt using the following words:</h3>
+          <h6>Credit: <a href="https://en.oxforddictionaries.com/explore/weird-and-wonderful-words/">Oxford Dictionary's Weird and Wonderful Words</a></h6>
           <form onSubmit={this.handleSubmit}>
             <div className="text-left">
               {words}
@@ -132,6 +133,7 @@ class WordsRandomContainer extends Component {
         <div id="wordFormModal" data-options={forcedPrompt} data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog" className="reveal-modal text-center">
           <h1 className="name text-center">Prompt</h1>
           <h3>Please write a prompt using the following words:</h3>
+          <h6>Credit: <a href="https://en.oxforddictionaries.com/explore/weird-and-wonderful-words/">Oxford Dictionary's Weird and Wonderful Words</a></h6>
           <form onSubmit={this.handleSubmit}>
             <div className="text-left">
               {words}
