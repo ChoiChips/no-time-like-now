@@ -66,8 +66,6 @@ class PromptsNewContainer extends Component {
       submitButton = <input type="submit" value="Submit" className="radius button text-left"/>
     }
 
-    let submitButton;
-
     if (this.state.description.trim().length >= 10 && this.state.description.trim().length < 250) {
       submitButton = <input type="submit" value="Submit" />
     }
