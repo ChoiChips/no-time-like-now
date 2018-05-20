@@ -26,24 +26,28 @@ class WordAnswerContainer extends Component {
     .then(response => response.json())
     .then(body => {
       this.setState({
-        answer: body.answer,
-        words: body.answer.words
+        answer: body.word_answer,
+        words: body.word_answer.words
       });
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
 
   render() {
+
+    let words = this.state.words.map( (word) => {
+      return (
+        <h3 key={word.word}><strong>{word.word}:</strong> {word.definition}</h3>
+      )
+    })
+
     return(
       <div className="row collapse">
         <div className="columns small-12">
           <h1 className="name text-center">Prompt</h1>
           <h3 className="page-header text-center">
-            {this.state.words.description}
+            {words}
           </h3>
-        </div>
-        <div className="name-show">
-          <Link className="name" to={`/users/${this.state.words.id}`}>{this.state.words.handle}</Link> on {this.state.words.date_made}
         </div>
         <div className="columns small-12">
           <h4 className="page-header text-left">

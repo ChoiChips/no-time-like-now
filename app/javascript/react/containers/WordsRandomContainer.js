@@ -69,12 +69,16 @@ class WordsRandomContainer extends Component {
       })
       .then(response => {
         if (response.ok) {
-          // window.location.href = `http://localhost:3000/words/${this.state.word.id}`
+          return response;
         } else {
           let errorMessage = `${response.status} (${response.statusText})`,
           error = new Error(errorMessage);
           throw(error);
         }
+      })
+      .then(response => response.json())
+      .then(wordAnswerId => {
+        window.location.href = `http://localhost:3000/word_answers/${wordAnswerId}`
       })
       .catch(error => console.error(`Error in fetch (submitting new answer): ${error.message}`))
     }
@@ -82,21 +86,18 @@ class WordsRandomContainer extends Component {
 
   render() {
     let characterCount = this.state.answer.trim().length
-    let message;
-
-    if (characterCount < 100) {
-      message = `You need ${100 - characterCount} more characters to submit. Remember, there is no backspace!`
-    } else if (characterCount >= 100 && characterCount < 500) {
-      message = `You have met expectations! Character count = ${characterCount}`
-    } else if (characterCount >= 500 && characterCount < 1000) {
-      message = `You have exceeded expectations! Character count = ${characterCount}`
-    } else if (characterCount >= 1000) {
-      message = `You're really going at it, arent you... Character count = ${characerCount}`
-    }
-
+    let wordCount = this.state.answer.split(/\s+/).length - 1
+    let message = "Submission Requirements: "
     let submitButton;
 
-    if (this.state.answer.trim().length >= 100) {
+    if (characterCount < 100) {
+      message += `${characterCount}/100 characters `
+    }
+    if (wordCount < 20) {
+      message += `${wordCount}/20 words`
+    }
+    if (characterCount >= 100 && wordCount >= 20) {
+      message = `You can now submit! Character count = ${characterCount}. Word count = ${wordCount}`
       submitButton = <input type="submit" value="Submit" className="radius button text-left"/>
     }
 

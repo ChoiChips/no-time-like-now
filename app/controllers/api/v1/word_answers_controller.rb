@@ -2,7 +2,7 @@ class Api::V1::WordAnswersController < ApiController
   # before_action :authenticate_user!
 
   def show
-    render json: WordAnswer.find(params[:id])
+    render json: WordAnswer.find(params[:id]), serializer: WordAnswersSerializer
   end
 
   def create
@@ -14,7 +14,7 @@ class Api::V1::WordAnswersController < ApiController
         WordCombo.create!(word_answer: new_answer, word_id: params[:first])
         WordCombo.create!(word_answer: new_answer, word_id: params[:second])
         WordCombo.create!(word_answer: new_answer, word_id: params[:third])
-        render json: new_answer
+        render json: new_answer.id
       else
         render json: new_answer.errors.full_messages
       end
