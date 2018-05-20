@@ -50,24 +50,20 @@ class PromptsNewContainer extends Component {
   }
 
   render() {
-    let characterCount = this.state.answer.trim().length
-    let wordCount = this.state.answer.split(/\s+/).length - 1
+    let characterCount = this.state.description.trim().length
+    let wordCount = this.state.description.split(/\s+/).length - 1
     let message = "Submission Requirements: "
     let submitButton;
 
-    if (characterCount < 100) {
-      message += `${characterCount}/100 characters `
+    if (characterCount < 100 || characterCount > 250) {
+      message += `${characterCount}/100 characters. No more than 250 characters. `
     }
     if (wordCount < 20) {
-      message += `${wordCount}/20 words`
+      message += `${wordCount}/20 words.`
     }
-    if (characterCount >= 100 && wordCount >= 20) {
+    if (characterCount >= 100 && characterCount <= 250 && wordCount >= 20) {
       message = `You can now submit! Character count = ${characterCount}. Word count = ${wordCount}`
       submitButton = <input type="submit" value="Submit" className="radius button text-left"/>
-    }
-
-    if (this.state.description.trim().length >= 10 && this.state.description.trim().length < 250) {
-      submitButton = <input type="submit" value="Submit" />
     }
 
     return(
