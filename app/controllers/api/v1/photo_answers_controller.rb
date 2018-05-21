@@ -1,4 +1,4 @@
-class Api::V1::PhotoAnswerController < ApiController
+class Api::V1::PhotoAnswersController < ApiController
 
   def index
     render json: PhotoAnswer.where(user: current_user)

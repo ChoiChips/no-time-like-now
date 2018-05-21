@@ -21,4 +21,5 @@ SimpleCov.start do
   add_filter 'app/serializers/answer_serializer.rb'
   add_filter 'app/serializers/reddit_show_serializer.rb'
   add_filter 'app/serializers/prompt_show_serializer.rb'
+  add_filter 'app/serializers/photo_answer_serializer.rb'
 end

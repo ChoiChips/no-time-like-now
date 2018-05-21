@@ -1,6 +1,6 @@
 class CreatePhotoAnswer < ActiveRecord::Migration[5.2]
   def change
-    create_table :photos do |t|
+    create_table :photo_answers do |t|
       t.string :url, null: false
       t.string :answer, null: false
       t.belongs_to :user
