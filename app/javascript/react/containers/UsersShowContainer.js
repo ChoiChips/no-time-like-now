@@ -11,6 +11,9 @@ class UsersShowContainer extends Component {
       user: {},
       prompts: [],
       answers: [],
+      redditAnswers: [],
+      wordAnswers: [],
+      photoAnswers: [],
       chartData: {}
     }
   }
@@ -30,8 +33,10 @@ class UsersShowContainer extends Component {
         }
       })
       .then(response => response.json())
-      .then(body => {
-        let chartData = body.user.answers.map( (answer) => {
+      .then(body => body.user)
+      .then(user => {
+        let allAnswers = user.answers.concat(user.reddit_answers, user.word_answers, user.photo_answers)
+        let chartData = allAnswers.map( (answer) => {
           let splitDate = answer.date_made.split("/")
           let date = new Date(splitDate[2], splitDate[0] - 1, splitDate[1])
           return (
@@ -41,9 +46,12 @@ class UsersShowContainer extends Component {
         chartData.unshift(["Date", "Word Count"])
 
         this.setState({
-          user: body.user,
-          prompts: body.user.prompts,
-          answers: body.user.answers,
+          user: user,
+          prompts: user.prompts,
+          answers: user.answers,
+          redditAnswers: user.redditAnswers,
+          wordAnswers: user.wordAnswers,
+          photoAnswers: user.photoAnswers,
           chartData: chartData
          });
       })
@@ -74,12 +82,14 @@ class UsersShowContainer extends Component {
       )
     })
 
+
+
     let recentActivity = <div></div>
 
     if (this.state.prompts.length === 0 && this.state.answers.length === 0) {
       recentActivity = <h1 className="recent-activity">{this.state.user.handle} Has No Recent Activity</h1>
 
-    } else if (this.state.prompts.length !== 0 && this.state.answers.length === 0) {
+    } else if (this.state.prompts.length !== 0 && this.state.chartData.length === 0) {
       recentActivity =
         <div className="row spot-container">
           <h1 className="recent-activity">{this.state.user.handle}'s Recent Activity</h1>
@@ -91,7 +101,7 @@ class UsersShowContainer extends Component {
         </div>
       </div>
 
-    } else if (this.state.prompts.length === 0 && this.state.answers.length !== 0) {
+    } else if (this.state.prompts.length === 0 && this.state.chartData.length !== 0) {
       recentActivity =
         <div className="row spot-container">
           <h1 className="recent-activity">{this.state.user.handle}'s Recent Activity</h1>
@@ -108,7 +118,7 @@ class UsersShowContainer extends Component {
           </div>
         </div>
 
-    } else if (this.state.prompts.length !== 0 && this.state.answers.length !== 0) {
+    } else if (this.state.prompts.length !== 0 && this.state.chartData.length !== 0) {
       recentActivity = <div className="row spot-container">
         <h1 className="recent-activity">{this.state.user.handle}'s Recent Activity</h1>
         <div>

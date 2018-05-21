@@ -13,4 +13,5 @@ class User < ApplicationRecord
   has_many :answers
   has_many :reddit_answers
   has_many :word_answers
+  has_many :photo_answers
 end

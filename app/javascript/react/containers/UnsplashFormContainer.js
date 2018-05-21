@@ -65,12 +65,16 @@ class UnsplashFormContainer extends Component {
       })
       .then(response => {
         if (response.ok) {
-          window.location.href = `http://localhost:3000/reddit/${this.state.photo.id}`
+          return response;
         } else {
           let errorMessage = `${response.status} (${response.statusText})`,
           error = new Error(errorMessage);
           throw(error);
         }
+      })
+      .then(response => response.json())
+      .then(body => {
+        window.location.href = `http://localhost:3000/unsplash/answers/${body.photo_answer.id}`
       })
       .catch(error => console.error(`Error in fetch (submitting new answer): ${error.message}`))
     }

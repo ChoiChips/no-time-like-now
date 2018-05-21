@@ -4,6 +4,7 @@ class UserSerializer < ActiveModel::Serializer
   has_many :answers
   has_many :reddit_answers
   has_many :word_answers
+  has_many :photo_answers
 
   def is_current_user
     object == current_user
