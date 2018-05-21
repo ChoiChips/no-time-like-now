@@ -11,12 +11,10 @@ Users can browse and respond to writing prompts collected from sources across th
 
 ## Main Features:
 1. Custom authorization requiring users to respond to mandatory daily prompt before allowing access to site. During response users cannot backspace, must meed character/word count minimum, and are locked in modal view.
-
 2. Prompt sources:
-* Reddit: Collected writing prompts from /r/WritingPrompts using Reddit API (no NSFW content). Can sort by different categories including "Hot", "Rising", "New", and "Controversial"
-* Unsplash: Used Unsplash API (Source) for embedding free high-res photos. Photos are generated randomly.
-* Oxford Dictionaries: Used Nokogiri gem to crawl Oxford Dictionaries' "Weird and Wonderful Words" and collected words/definitions into database.
-
+  1. Reddit: Collected writing prompts from /r/WritingPrompts using Reddit API (no NSFW content). Can sort by different categories including "Hot", "Rising", "New", and "Controversial"
+  2. Unsplash: Used Unsplash API (Source) for embedding free high-res photos. Photos are generated randomly.
+  3. Oxford Dictionaries: Used Nokogiri gem to crawl Oxford Dictionaries' "Weird and Wonderful Words" and collected words/definitions into database.
 3. User responses are collected and displayed on their profile pages, along with Google Charts visualization of recent activity.
 
 ## Front End:
