@@ -10,9 +10,9 @@
 require 'nokogiri'
 require 'open-uri'
 
-# User.destroy_all
-# Prompt.destroy_all
-# Answer.destroy_all
+User.destroy_all
+Prompt.destroy_all
+Answer.destroy_all
 #
 # # Test users
 user_1 = User.create!(:handle => 'Nick', :email => 'nick@gmail.com', :password => 'topsecret', :password_confirmation => 'topsecret')
