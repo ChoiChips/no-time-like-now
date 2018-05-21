@@ -18,14 +18,10 @@ class Api::V1::RedditsController < ApiController
   def create
     new_prompt = Reddit.new(prompt_params)
 
-    if user_signed_in?
-      if new_prompt.save
-        render json: new_prompt
-      else
-        render json: Reddit.where(description: prompt_params["description"])
-      end
+    if new_prompt.save
+      render json: new_prompt
     else
-      render json: ["Please sign in first"]
+      render json: Reddit.where(description: prompt_params["description"])
     end
   end
 
