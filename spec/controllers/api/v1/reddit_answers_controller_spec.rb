@@ -20,7 +20,7 @@ RSpec.describe Api::V1::RedditAnswersController, type: :controller do
   end
 
   describe "GET#show" do
-    it "should return a single answer" do
+    it "should return a single reddit answer" do
       user_1 = FactoryBot.create(:user)
       reddit1 = Reddit.create!(description: "This is test prompt 1, written by user_1, to be answered with a test response.", handle: "GaryScott112", date_made: "5/10/18", url: "www.test.com")
       reddit_answer1 = RedditAnswer.create!(answer: "This is test answer 2, written by user_1, for test prompt. It must be a certain length", user: user_1, reddit: reddit1)

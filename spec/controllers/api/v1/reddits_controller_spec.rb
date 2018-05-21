@@ -4,7 +4,7 @@ RSpec.describe Api::V1::RedditsController, type: :controller do
   let(:returned_json) { JSON.parse(response.body) }
 
   describe "GET#index" do
-    it "should return a list of all the prompts" do
+    it "should return a list of all the reddit prompts" do
       user_1 = FactoryBot.create(:user)
       reddit1 = Reddit.create!(description: "This is test prompt 1, written by user_1, to be answered with a test response.", handle: "GaryScott112", date_made: "5/10/18", url: "www.test.com")
       reddit2 = Reddit.create!(description: "This is test prompt 2, written by user_1, to be answered with a test response.", handle: "GaryScott112", date_made: "5/10/18", url: "www.test.com")
