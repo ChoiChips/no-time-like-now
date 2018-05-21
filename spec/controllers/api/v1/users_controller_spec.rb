@@ -13,7 +13,7 @@ RSpec.describe Api::V1::UsersController, type: :controller do
       expect(response.content_type).to eq("application/json")
 
       expect(returned_json.length).to eq 1
-      expect(returned_json["user"]["handle"]).to eq "user1"
+      expect(returned_json["user"]["handle"]).to eq user_1.handle
 
     end
   end
