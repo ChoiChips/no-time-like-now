@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root 'static_pages#index'
   devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  namespace :api do
+  namespace :api, defaults: { format: :json }, path: '/api' do
     namespace :v1 do
       get '/prompts/random', to: 'prompts#random'
       get '/words/random', to: 'words#random'
