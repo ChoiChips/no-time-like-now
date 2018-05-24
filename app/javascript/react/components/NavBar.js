@@ -11,7 +11,7 @@ class NavBar extends Component {
   }
 
   componentDidMount() {
-    fetch('/api/v1/users.json', {
+    fetch('/api/v1/users', {
       credentials: 'same-origin'
     })
     .then(response => {
