@@ -29,7 +29,7 @@ class NavBar extends Component {
         currentUser: currentUser.user,
         recentAnswer: currentUser.user.recent_answer
       });
-      if (this.state.recentAnswer === false && window.location.href !== "http://localhost:3000/prompts/random") {
+      if (this.state.recentAnswer === false && window.location.href !== "https://no-time-like-now.herokuapp.com/prompts/random") {
         window.location='/prompts/random'
       }
     })
