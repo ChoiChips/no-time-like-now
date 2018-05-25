@@ -29,6 +29,9 @@ class NavBar extends Component {
         currentUser: currentUser.user,
         recentAnswer: currentUser.user.recent_answer
       });
+      if (this.state.recentAnswer === false && window.location.href !== "http://localhost:3000/prompts/random") {
+        window.location='/prompts/random'
+      }
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
@@ -53,13 +56,14 @@ class NavBar extends Component {
       });
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
-    if (this.state.recentAnswer === false) {
+    if (this.state.recentAnswer === false && window.location.href !== "https://no-time-like-now.herokuapp.com/prompts/random") {
+      // window.location='/prompts/random'
+      // this.props.browserHistory.push('/prompts/random');
       window.location='/prompts/random'
     }
   }
 
   render() {
-
     return (
       <div className="navbar">
         <div className="content">
