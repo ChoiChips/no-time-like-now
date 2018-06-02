@@ -38,7 +38,7 @@ class RedditFormContainer extends Component {
     if ( confirm("Are you sure you wish to submit?") == false ) {
       return false ;
     } else {
-      postRedditAnswer()
+      this.postRedditAnswer()
     }
   }
 
