@@ -8,81 +8,18 @@ class RedditFormContainer extends Component {
       answer:  '',
       prompt: {}
     }
-  this.handleChange = this.handleChange.bind(this)
-  this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.getRedditPrompt = this.getRedditPrompt.bind(this)
+    this.postRedditPrompt = this.postRedditPrompt.bind(this)
+    this.postRedditAnswer = this.postRedditAnswer.bind(this)
   }
 
   componentDidMount() {
-
-    // consider using window.location.href for current url
-
     if (this.props.location.state !== undefined) {
-      let submission = {
-        prompt: {
-          handle: this.props.location.state.handle,
-          description: this.props.location.state.description,
-          date_made: this.props.location.state.date_made,
-          url: this.props.location.state.url
-        }
-      }
-
-      fetch(`/api/v1/reddits`, {
-        credentials: 'same-origin',
-        method: 'POST',
-        body: JSON.stringify(submission),
-        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
-      })
-      .then(response => {
-        if (response.ok) {
-          return response;
-        } else {
-          let errorMessage = `${response.status} (${response.statusText})`,
-          error = new Error(errorMessage);
-          throw(error);
-        }
-      })
-      .then(response => response.json())
-      .then(body => {
-        if (body[0] === undefined) {
-          this.setState({ prompt: body })
-        } else {
-          this.setState({ prompt: body[0] });
-        }
-        $(document).ready(function() {
-          setTimeout(function(){
-            $("#redditFormModal").foundation('reveal', 'open');
-          }, 0);
-        });
-      })
-      .catch(error => console.error(`Error in fetch (submitting new Reddit prompt): ${error.message}`))
-
+      this.postRedditPrompt()
     } else if (this.props.params.id) {
-      fetch(`/api/v1/reddits/${this.props.params.id}`, {
-        credentials: 'same-origin'
-      })
-      .then(response => {
-        if (response.ok) {
-          return response;
-        } else {
-          // window.location='/'
-
-          let errorMessage = `${response.status} (${response.statusText})`,
-          error = new Error(errorMessage);
-          throw(error);
-        }
-      })
-      .then(response => response.json())
-      .then(prompt => {
-        this.setState ({
-          prompt: prompt.reddit
-        })
-        $(document).ready(function() {
-          setTimeout(function(){
-            $("#redditFormModal").foundation('reveal', 'open');
-          }, 0);
-        });
-      })
-      .catch(error => console.error(`Error in fetch: ${error.message}`))
+      this.getRedditPrompt()
     }
   }
 
@@ -100,30 +37,101 @@ class RedditFormContainer extends Component {
 
     if ( confirm("Are you sure you wish to submit?") == false ) {
       return false ;
-    } else {;
-      let submission = {
-        answer: {
-          answer: this.state.answer
-        }
-      }
-
-      fetch(`/api/v1/reddits/${this.state.prompt.id}/reddit_answers`, {
-        credentials: 'same-origin',
-        method: 'POST',
-        body: JSON.stringify(submission),
-        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
-      })
-      .then(response => {
-        if (response.ok) {
-          window.location.href = `http://localhost:3000/reddit/${this.state.prompt.id}`
-        } else {
-          let errorMessage = `${response.status} (${response.statusText})`,
-          error = new Error(errorMessage);
-          throw(error);
-        }
-      })
-      .catch(error => console.error(`Error in fetch (submitting new answer): ${error.message}`))
+    } else {
+      this.postRedditAnswer()
     }
+  }
+
+  getRedditPrompt() {
+    fetch(`/api/v1/reddits/${this.props.params.id}`, {
+      credentials: 'same-origin'
+    })
+    .then(response => {
+      if (response.ok) {
+        return response;
+      } else {
+        let errorMessage = `${response.status} (${response.statusText})`,
+        error = new Error(errorMessage);
+        throw(error);
+      }
+    })
+    .then(response => response.json())
+    .then(prompt => {
+      this.setState ({
+        prompt: prompt.reddit
+      })
+      $(document).ready(function() {
+        setTimeout(function(){
+          $("#redditFormModal").foundation('reveal', 'open');
+        }, 0);
+      });
+    })
+    .catch(error => console.error(`Error in fetch: ${error.message}`))
+  }
+
+  postRedditAnswer() {
+    let submission = {
+      answer: {
+        answer: this.state.answer
+      }
+    }
+    fetch(`/api/v1/reddits/${this.state.prompt.id}/reddit_answers`, {
+      credentials: 'same-origin',
+      method: 'POST',
+      body: JSON.stringify(submission),
+      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
+    })
+    .then(response => {
+      if (response.ok) {
+        window.location.href = `http://localhost:3000/reddit/${this.state.prompt.id}`
+      } else {
+        let errorMessage = `${response.status} (${response.statusText})`,
+        error = new Error(errorMessage);
+        throw(error);
+      }
+    })
+    .catch(error => console.error(`Error in fetch (submitting new answer): ${error.message}`))
+  }
+
+  postRedditPrompt() {
+    let submission = {
+      prompt: {
+        handle: this.props.location.state.handle,
+        description: this.props.location.state.description,
+        date_made: this.props.location.state.date_made,
+        url: this.props.location.state.url
+      }
+    }
+
+    fetch(`/api/v1/reddits`, {
+      credentials: 'same-origin',
+      method: 'POST',
+      body: JSON.stringify(submission),
+      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
+    })
+    .then(response => {
+      if (response.ok) {
+        return response;
+      } else {
+        let errorMessage = `${response.status} (${response.statusText})`,
+        error = new Error(errorMessage);
+        throw(error);
+      }
+    })
+    .then(response => response.json())
+    .then(body => {
+      if (body[0] === undefined) {
+        this.setState({ prompt: body })
+      } else {
+        this.setState({ prompt: body[0] });
+      }
+      $(document).ready(function() {
+        setTimeout(function(){
+          $("#redditFormModal").foundation('reveal', 'open');
+        }, 0);
+      });
+    })
+    .catch(error => console.error(`Error in fetch (submitting new Reddit prompt): ${error.message}`))
   }
 
   render() {
