@@ -5,9 +5,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :null_session
 
   before_action :configure_permitted_parameters, if: :devise_controller?
-
-
-
+  
   protected
 
   def configure_permitted_parameters
@@ -18,7 +16,7 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
     if request.referrer =~ /sign\_up/
-      #new user
+      #new user coming from Sign Up page
       '/prompts/random'
     else
       "/users/#{current_user.id}"
